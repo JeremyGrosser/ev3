@@ -1,0 +1,47 @@
+
+**** Build of configuration Linux_X86 for project lms2012 ****
+
+make all 
+Building file: ../source/c_branch.c
+Invoking: GCC C Compiler
+gcc -DLinux_X86 -I"/home/tcp/projects/lms2012/lms2012/source" -I"/home/tcp/projects/lms2012/c_input/source" -I"/home/tcp/projects/lms2012/c_output/source" -I"/home/tcp/projects/lms2012/c_memory/source" -I"/home/tcp/projects/lms2012/c_ui/source" -I"/home/tcp/projects/lms2012/c_com/source" -I"/home/tcp/projects/lms2012/c_sound/source" -I/usr/local/include -I/usr/include -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"source/c_branch.d" -MT"source/c_branch.d" -o"source/c_branch.o" "../source/c_branch.c"
+Finished building: ../source/c_branch.c
+ 
+Building file: ../source/c_compare.c
+Invoking: GCC C Compiler
+gcc -DLinux_X86 -I"/home/tcp/projects/lms2012/lms2012/source" -I"/home/tcp/projects/lms2012/c_input/source" -I"/home/tcp/projects/lms2012/c_output/source" -I"/home/tcp/projects/lms2012/c_memory/source" -I"/home/tcp/projects/lms2012/c_ui/source" -I"/home/tcp/projects/lms2012/c_com/source" -I"/home/tcp/projects/lms2012/c_sound/source" -I/usr/local/include -I/usr/include -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"source/c_compare.d" -MT"source/c_compare.d" -o"source/c_compare.o" "../source/c_compare.c"
+Finished building: ../source/c_compare.c
+ 
+Building file: ../source/c_math.c
+Invoking: GCC C Compiler
+gcc -DLinux_X86 -I"/home/tcp/projects/lms2012/lms2012/source" -I"/home/tcp/projects/lms2012/c_input/source" -I"/home/tcp/projects/lms2012/c_output/source" -I"/home/tcp/projects/lms2012/c_memory/source" -I"/home/tcp/projects/lms2012/c_ui/source" -I"/home/tcp/projects/lms2012/c_com/source" -I"/home/tcp/projects/lms2012/c_sound/source" -I/usr/local/include -I/usr/include -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"source/c_math.d" -MT"source/c_math.d" -o"source/c_math.o" "../source/c_math.c"
+Finished building: ../source/c_math.c
+ 
+Building file: ../source/c_move.c
+Invoking: GCC C Compiler
+gcc -DLinux_X86 -I"/home/tcp/projects/lms2012/lms2012/source" -I"/home/tcp/projects/lms2012/c_input/source" -I"/home/tcp/projects/lms2012/c_output/source" -I"/home/tcp/projects/lms2012/c_memory/source" -I"/home/tcp/projects/lms2012/c_ui/source" -I"/home/tcp/projects/lms2012/c_com/source" -I"/home/tcp/projects/lms2012/c_sound/source" -I/usr/local/include -I/usr/include -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"source/c_move.d" -MT"source/c_move.d" -o"source/c_move.o" "../source/c_move.c"
+Finished building: ../source/c_move.c
+ 
+Building file: ../source/c_timer.c
+Invoking: GCC C Compiler
+gcc -DLinux_X86 -I"/home/tcp/projects/lms2012/lms2012/source" -I"/home/tcp/projects/lms2012/c_input/source" -I"/home/tcp/projects/lms2012/c_output/source" -I"/home/tcp/projects/lms2012/c_memory/source" -I"/home/tcp/projects/lms2012/c_ui/source" -I"/home/tcp/projects/lms2012/c_com/source" -I"/home/tcp/projects/lms2012/c_sound/source" -I/usr/local/include -I/usr/include -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"source/c_timer.d" -MT"source/c_timer.d" -o"source/c_timer.o" "../source/c_timer.c"
+Finished building: ../source/c_timer.c
+ 
+Building file: ../source/lms2012.c
+Invoking: GCC C Compiler
+gcc -DLinux_X86 -I"/home/tcp/projects/lms2012/lms2012/source" -I"/home/tcp/projects/lms2012/c_input/source" -I"/home/tcp/projects/lms2012/c_output/source" -I"/home/tcp/projects/lms2012/c_memory/source" -I"/home/tcp/projects/lms2012/c_ui/source" -I"/home/tcp/projects/lms2012/c_com/source" -I"/home/tcp/projects/lms2012/c_sound/source" -I/usr/local/include -I/usr/include -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"source/lms2012.d" -MT"source/lms2012.d" -o"source/lms2012.o" "../source/lms2012.c"
+Finished building: ../source/lms2012.c
+ 
+Building file: ../source/validate.c
+Invoking: GCC C Compiler
+gcc -DLinux_X86 -I"/home/tcp/projects/lms2012/lms2012/source" -I"/home/tcp/projects/lms2012/c_input/source" -I"/home/tcp/projects/lms2012/c_output/source" -I"/home/tcp/projects/lms2012/c_memory/source" -I"/home/tcp/projects/lms2012/c_ui/source" -I"/home/tcp/projects/lms2012/c_com/source" -I"/home/tcp/projects/lms2012/c_sound/source" -I/usr/local/include -I/usr/include -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"source/validate.d" -MT"source/validate.d" -o"source/validate.o" "../source/validate.c"
+Finished building: ../source/validate.c
+ 
+Building target: lms2012
+Invoking: GCC C Linker
+gcc -L"/home/tcp/projects/lms2012/lms2012/Linux_X86/sys/lib" -o"lms2012"  ./source/c_branch.o ./source/c_compare.o ./source/c_math.o ./source/c_move.o ./source/c_timer.o ./source/lms2012.o ./source/validate.o   -lm -lc_ui -lc_sound -lrt -lc_com -lc_input -lc_output -lc_memory
+Finished building target: lms2012
+ 
+make --no-print-directory post-build
+cp /home/tcp/projects/lms2012/lms2012/Linux_X86/lms2012 /home/tcp/projects/lms2012/lms2012/Linux_X86/sys/lms2012; rm /home/tcp/projects/lms2012/lms2012/Linux_X86/lms2012; rm -r /home/tcp/projects/lms2012/lms2012/Linux_X86/source; rm /home/tcp/projects/lms2012/lms2012/Linux_X86/makefile; rm /home/tcp/projects/lms2012/lms2012/Linux_X86/objects.mk; rm /home/tcp/projects/lms2012/lms2012/Linux_X86/sources.mk
+ 

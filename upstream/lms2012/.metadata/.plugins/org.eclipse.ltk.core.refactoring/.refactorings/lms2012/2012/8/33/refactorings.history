@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename resource &apos;lms2012/doc/schematics/ep2_p2.png&apos; to &apos;ep2p2.png&apos;" description="Rename resource &apos;ep2_p2.png&apos;" flags="7" id="org.eclipse.ltk.core.refactoring.rename.resource" input="doc/schematics/ep2_p2.png" name="ep2p2.png" stamp="1345183477048" updateReferences="true"/>
+</session>

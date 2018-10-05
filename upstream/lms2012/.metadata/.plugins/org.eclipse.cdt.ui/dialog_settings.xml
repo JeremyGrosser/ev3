@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<section name="Workbench">
+	<section name="OptionalMessageDialog.hide.">
+		<item value="0" key="askReindex.detail"/>
+	</section>
+	<section name="completion_proposal_size">
+	</section>
+	<section name="PDOMSearchPage">
+		<item value="227191" key="searchFlags"/>
+		<item value="false" key="caseSensitive"/>
+		<list key="previousPatterns">
+			<item value="SPECIALVERS"/>
+			<item value="alias"/>
+			<item value="print"/>
+			<item value="Accu"/>
+			<item value="SET_LOG_SYNC_TIME"/>
+			<item value="variabletypes"/>
+			<item value="Click"/>
+			<item value="DEBUG_TRACE_ANGLE"/>
+			<item value="IN_DISCONNECT_STEADY_TIME"/>
+			<item value="DIR_DEEPT"/>
+			<item value="UiInstanceClick"/>
+			<item value="IIC_DATA_READY"/>
+			<item value="cInputSetDeviceType"/>
+			<item value="DEBUG_C_INPUT_DAISYCHAIN"/>
+			<item value="cComSetDeviceType"/>
+			<item value="TCP"/>
+			<item value="usb_char_in_length"/>
+			<item value="cDaisyPrepareNext"/>
+			<item value="DEMO_FILE_NAME"/>
+			<item value="dLcdAutoUpdate"/>
+			<item value="VoltLow"/>
+			<item value="TEST_UART_DEVICE"/>
+			<item value="ExecuteByteCode"/>
+			<item value="cInputStopAll"/>
+			<item value="PowerShutdown"/>
+			<item value="Iintegrated"/>
+			<item value="StartLineNo"/>
+			<item value="LogOut"/>
+			<item value="HIGHDEBUG"/>
+		</list>
+	</section>
+	<section name="org.eclipse.cdt.ui.text.hover.CMacroExpansionExploration.internal">
+		<item value="719" key="size.width"/>
+		<item value="240" key="size.height"/>
+	</section>
+	<section name="org.eclipse.cdt.ui.text.hover.CMacroExpansionExploration">
+	</section>
+</section>

@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename resource &apos;lmssrc/adk/apps.txt&apos; to &apos;apps.c&apos;" description="Rename resource &apos;apps.txt&apos;" flags="7" id="org.eclipse.ltk.core.refactoring.rename.resource" input="adk/apps.txt" name="apps.c" stamp="1354107142936" updateReferences="true"/>
+</session>

@@ -1,0 +1,8 @@
+#!/bin/bash
+
+src=$(pwd)
+dst="$HOME/projects/lms2012/lmssrc/tst/"
+java -jar assembler.jar "$dst"$1
+cp "$dst"$1.rbf "$HOME/am1808/DaVinci-PSP-SDK-03.20.00.13/filesys/home/root/lms2012/prjs/BrkProg_SAVE"/"$1".rbf
+rm "$dst"$1.rbf
+

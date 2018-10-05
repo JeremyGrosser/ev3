@@ -1,0 +1,1060 @@
+define    SAMPLETIME    10
+define    SAMPLES       2
+
+DATA32    StartTime
+DATA32    NewTime
+DATA32    Time
+DATA16    File
+
+vmthread  MAIN
+{
+  DATA32  Timer
+  DATA16  hValues
+  DATA16  hInits
+  DATA16  hDevices
+  DATA16  hTypes
+  DATA16  hModes
+  DATA16  hDataSets
+  
+  DATA32  Pointer
+  DATA8   State
+
+//****************************************
+// INITIALIZE
+//****************************************
+
+  // Init device settings
+  
+  ARRAY(CREATE16,SAMPLES,hInits)
+  ARRAY(FILL ,hInits,-1) 
+  ARRAY(CREATE8,SAMPLES,hDevices)
+  ARRAY(CREATE8,SAMPLES,hTypes)
+  ARRAY(FILL ,hTypes,0) 
+  ARRAY(CREATE8,SAMPLES,hModes)
+  ARRAY(FILL ,hModes,-1) 
+  ARRAY(CREATE8,SAMPLES,hDataSets)
+  ARRAY(FILL ,hDataSets,0) 
+  ARRAY(CREATEF,SAMPLES,hValues)
+  
+  // Select devices
+  ARRAY_WRITE(hDevices,0,0)
+  ARRAY_WRITE(hDevices,1,1)
+
+  // Open file
+  FILE(OPEN_LOG,'logfile',0,0,0,SAMPLETIME,0,'Time\tDevice1\tDevice2\r\n',File)
+  
+  // Get Start time
+  TIMER_READ(StartTime)
+  SUB32(StartTime,SAMPLETIME,Time)
+
+//****************************************
+// LOG
+//****************************************
+Log:  
+
+  // Check time
+  TIMER_READ(NewTime)
+  SUB32(NewTime,Time,NewTime)
+  JR_LT32(NewTime,SAMPLETIME,NotTimeYet)
+
+  // Calculate sample time
+  ADD32(Time,SAMPLETIME,Time)
+  
+  // Make samples
+  INPUT_SAMPLE(SAMPLETIME,SAMPLES,@hInits,@hDevices,@hTypes,@hModes,@hDataSets,@hValues)
+  
+  // Save samples
+  FILE(WRITE_LOG,File,Time,SAMPLES,@hValues)
+  
+NotTimeYet:
+
+  // Check stop  
+  UI_BUTTON(SHORTPRESS,ENTER_BUTTON,State)
+  JR_FALSE(State,Log)
+  
+  
+//****************************************
+// EXIT
+//****************************************
+
+  // Close file
+  FILE(CLOSE_LOG,File,'logfile')
+/*  
+  ARRAY(DELETE,hValues)
+  ARRAY(DELETE,hDataSets)
+  ARRAY(DELETE,hModes)
+  ARRAY(DELETE,hTypes)
+  ARRAY(DELETE,hDevices)
+  ARRAY(DELETE,hInits)
+*/  
+}
+
+
+/*
+define    SAMPLETIME    10
+define    SAMPLES       2
+
+DATA32    StartTime
+DATA32    NewTime
+DATA32    Time
+DATA16    File
+
+vmthread  MAIN
+{
+  DATA32  Timer
+  ARRAYF  Values SAMPLES
+  ARRAY16 Inits SAMPLES
+  ARRAY8  Devices SAMPLES
+  ARRAY8  Types SAMPLES
+  ARRAY8  Modes SAMPLES
+  ARRAY8  DataSets SAMPLES
+  
+  DATA8   Pointer
+  DATA8   State
+
+//****************************************
+// INITIALIZE
+//****************************************
+
+  // Init device settings
+  MOVE8_8(0,Pointer)
+Init:
+  WRITE16(-1,Pointer,Inits)
+  WRITE8(0,Pointer,Types)
+  WRITE8(-1,Pointer,Modes)
+  WRITE8(0,Pointer,DataSets)
+
+  ADD8(Pointer,1,Pointer)
+  JR_LT8(Pointer,SAMPLES,Init)  
+
+  // Select devices
+  WRITE8(0,0,Devices)
+  WRITE8(1,1,Devices)
+
+  // Open file
+  FILE(OPEN_LOG,'logfile',0,0,0,SAMPLETIME,0,'Time\tDevice1\tDevice2\r\n',File)
+  
+  // Get Start time
+  TIMER_READ(StartTime)
+  SUB32(StartTime,SAMPLETIME,Time)
+
+//****************************************
+// LOG
+//****************************************
+Log:  
+
+  // Check time
+  TIMER_READ(NewTime)
+  SUB32(NewTime,Time,NewTime)
+  JR_LT32(NewTime,SAMPLETIME,NotTimeYet)
+
+  // Calculate sample time
+  ADD32(Time,SAMPLETIME,Time)
+  
+  // Make samples
+  INPUT_SAMPLE(SAMPLETIME,SAMPLES,Inits,Devices,Types,Modes,DataSets,Values)
+  
+  // Save samples
+  FILE(WRITE_LOG,File,Time,SAMPLES,Values)
+  
+NotTimeYet:
+
+  // Check stop  
+  UI_BUTTON(SHORTPRESS,ENTER_BUTTON,State)
+  JR_FALSE(State,Log)
+  
+  
+//****************************************
+// EXIT
+//****************************************
+
+  // Close file
+  FILE(CLOSE_LOG,File,'logfile')
+}
+
+*/
+
+/*
+vmthread  MAIN
+{
+  DATA8   State
+
+Loop:
+  UI_BUTTON(GET_BUMBED,ENTER_BUTTON,State)
+  JR_FALSE(State,NotPressedYet)
+
+  CALL(Bumbed)
+
+  JR(Loop)
+
+StillPressed:
+NotPressedYet:
+
+  CALL(NotBumbed)
+
+  JR(Loop)
+}
+
+
+subcall   Bumbed
+{
+  DATA32  Timer
+
+  UI_DRAW(FILLWINDOW,BG_COLOR,0,0)
+  UI_DRAW(TEXT,FG_COLOR,50,50,'BUMBED')
+  UI_DRAW(UPDATE)
+
+  TIMER_WAIT(1000,Timer)
+  TIMER_READY(Timer)
+}
+
+
+subcall   NotBumbed
+{
+  UI_DRAW(FILLWINDOW,BG_COLOR,0,0)
+  UI_DRAW(UPDATE)
+}
+*/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*
+vmthread  MAIN
+{
+  DATA32  Timer
+
+  TST(TST_OPEN)
+
+Loop:
+  UI_DRAW(FILLWINDOW,0xAA,0,0)
+  UI_DRAW(UPDATE)
+
+  TIMER_WAIT(1000,Timer)
+  TIMER_READY(Timer)
+
+  UI_DRAW(FILLWINDOW,0x55,0,0)
+  UI_DRAW(UPDATE)
+
+  TIMER_WAIT(1000,Timer)
+  TIMER_READY(Timer)
+
+  JR(Loop)
+
+  TST(TST_CLOSE)
+}
+*/
+/*
+vmthread  MAIN
+{
+  DATA32  Timer
+  DATAF   DataF
+  ARRAY8  Cmd 8
+  ARRAY8  Res 8
+
+  WRITE8(0x01,0,Cmd)
+  WRITE8(0x41,1,Cmd)
+  WRITE8(0x02,2,Cmd)
+  INPUT_DEVICE(SETUP,0,1,3,Cmd,0,Res)
+
+  WRITE8(0x01,0,Cmd)
+  WRITE8(0x42,1,Cmd)
+
+Loop:
+
+  INPUT_DEVICE(SETUP,0,1,2,Cmd,1,Res)
+
+  INPUT_READSI(0,1,0,-1,DataF)
+
+  UI_DRAW(FILLWINDOW,BG_COLOR,0,0)
+  UI_DRAW(SELECT_FONT,LARGE_FONT)
+  UI_DRAW(VIEW_VALUE,FG_COLOR,20,54,DataF,6,1)
+  UI_DRAW(UPDATE)
+
+  TIMER_WAIT(250,Timer)
+  TIMER_READY(Timer)
+
+  JR(Loop)
+}
+*/
+/*
+vmthread  MAIN
+{
+  DATA32  Timer
+  DATAF   DataF
+  ARRAY8  Cmd 8
+  ARRAY8  Res 8
+
+  WRITE8(0x4C,0,Cmd)
+  WRITE8(0x01,1,Cmd)
+  WRITE8(0x60,2,Cmd)
+  INPUT_DEVICE(SETUP,0,1,3,Cmd,0,Res)
+
+  WRITE8(0x4C,0,Cmd)
+  WRITE8(0x00,1,Cmd)
+
+Loop:
+
+  INPUT_DEVICE(SETUP,0,1,2,Cmd,2,Res)
+
+  INPUT_READSI(0,1,0,-1,DataF)
+
+  UI_DRAW(FILLWINDOW,BG_COLOR,0,0)
+  UI_DRAW(SELECT_FONT,LARGE_FONT)
+  UI_DRAW(VIEW_VALUE,FG_COLOR,20,54,DataF,6,1)
+  UI_DRAW(UPDATE)
+
+  TIMER_WAIT(250,Timer)
+  TIMER_READY(Timer)
+
+  JR(Loop)
+}
+*/
+/*
+vmthread  MAIN
+{
+  DATA32  Timer
+  DATAF   DataF
+  DATA16  Value
+  ARRAY8  Cmd 8
+
+  WRITE8(0x01,0,Cmd)
+  WRITE8(0x42,1,Cmd)
+Loop:
+
+  INPUT_DEVICE(SETUP,0,1,2,Cmd,1,Value)
+
+  INPUT_DEVICE(SETUP,0,1,2,Cmd,1,Value)
+  UI_DRAW(FILLWINDOW,BG_COLOR,0,0)
+  UI_DRAW(SELECT_FONT,LARGE_FONT)
+  MOVE16_F(Value,DataF)
+  UI_DRAW(VIEW_VALUE,FG_COLOR,20,54,DataF,4,0)
+  UI_DRAW(UPDATE)
+  
+  TIMER_WAIT(50,Timer)
+  TIMER_READY(Timer)
+
+  JR(Loop)
+}
+*/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*
+vmthread  MAIN
+{
+  DATA32  Timer
+  DATA16  Value
+  DATAS   Text 17
+
+  TST(TST_OPEN)
+
+//  TST(TST_WRITE_PINS,0,5,'1001')
+
+Loop:
+  TST(TST_READ_PINS,0,5,Text)
+  UI_WRITE(PUT_STRING,'(')
+  UI_WRITE(PUT_STRING,Text)
+  UI_WRITE(PUT_STRING,')    (')
+
+  TST(TST_READ_PINS,16,6,Text)
+  UI_WRITE(PUT_STRING,Text)
+  UI_WRITE(PUT_STRING,') ')
+
+  TST(TST_READ_ADC,4,Value)
+  UI_WRITE(VALUE16,Value)
+  UI_WRITE(PUT_STRING,'\r\n')
+  UI_WRITE(WRITE_FLUSH)
+
+  TIMER_WAIT(500,Timer)
+  TIMER_READY(Timer)
+
+  JR(Loop)
+
+
+
+  TST(TST_CLOSE)
+}
+*/
+
+
+
+/*
+define    SIZE      500
+
+vmthread  MAIN
+{
+  DATA16  Line
+  DATAS   Text 16
+  DATAS   Textbox SIZE
+
+  UI_BUTTON(SET_BACK_BLOCK,1)
+
+  UI_DRAW(SELECT_FONT,SMALL_FONT)
+  UI_WRITE(TEXTBOX_APPEND,Textbox,SIZE,DEL_CRLF,'Line 1')
+  UI_DRAW(SELECT_FONT,TINY_FONT)
+  UI_WRITE(TEXTBOX_APPEND,Textbox,SIZE,DEL_CRLF,'Line 2')
+  UI_DRAW(SELECT_FONT,SMALL_FONT)
+  UI_WRITE(TEXTBOX_APPEND,Textbox,SIZE,DEL_CRLF,'Line 3')
+  UI_DRAW(SELECT_FONT,TINY_FONT)
+  UI_WRITE(TEXTBOX_APPEND,Textbox,SIZE,DEL_CRLF,'Line 4')
+  UI_DRAW(SELECT_FONT,SMALL_FONT)
+  UI_WRITE(TEXTBOX_APPEND,Textbox,SIZE,DEL_CRLF,'Line 5')
+  UI_DRAW(SELECT_FONT,NORMAL_FONT)
+  UI_WRITE(TEXTBOX_APPEND,Textbox,SIZE,DEL_CRLF,'Line 6')
+  UI_DRAW(SELECT_FONT,SMALL_FONT)
+  UI_WRITE(TEXTBOX_APPEND,Textbox,SIZE,DEL_CRLF,'Line 7')
+  UI_DRAW(SELECT_FONT,NORMAL_FONT)
+  UI_WRITE(TEXTBOX_APPEND,Textbox,SIZE,DEL_CRLF,'Line 8')
+  UI_DRAW(SELECT_FONT,SMALL_FONT)
+  UI_WRITE(TEXTBOX_APPEND,Textbox,SIZE,DEL_CRLF,'Line 9')
+  UI_DRAW(SELECT_FONT,NORMAL_FONT)
+  UI_WRITE(TEXTBOX_APPEND,Textbox,SIZE,DEL_CRLF,'Line 10')
+  UI_DRAW(SELECT_FONT,SMALL_FONT)
+  UI_WRITE(TEXTBOX_APPEND,Textbox,SIZE,DEL_CRLF,'Line 11')
+  UI_DRAW(SELECT_FONT,NORMAL_FONT)
+  UI_WRITE(TEXTBOX_APPEND,Textbox,SIZE,DEL_CRLF,'Line 12')
+  UI_DRAW(SELECT_FONT,SMALL_FONT)
+  UI_WRITE(TEXTBOX_APPEND,Textbox,SIZE,DEL_CRLF,'Line 13')
+  UI_DRAW(SELECT_FONT,NORMAL_FONT)
+  UI_WRITE(TEXTBOX_APPEND,Textbox,SIZE,DEL_CRLF,'Line 14')
+
+Loop:
+
+//  UI_DRAW(FILLWINDOW,0,0,0)
+
+  MOVE16_16(-1,Line)
+  UI_DRAW(TEXTBOX,10,10,158,100,Textbox,SIZE,DEL_CRLF,Line)
+
+  JR_LTEQ16(Line,0,Skip)
+
+  UI_READ(TEXTBOX_READ,Textbox,SIZE,DEL_CRLF,16,Line,Text)
+
+  UI_DRAW(TEXT,FG_COLOR,0,114,Text)
+  UI_DRAW(UPDATE)
+
+Skip:
+
+  UI_BUTTON(SET_BACK_BLOCK,0)
+
+End:
+  JR(End)
+}
+*/
+
+
+/*
+define    SIZE      500
+
+vmthread  MAIN
+{
+  DATA32  Size
+  DATA16  hTextbox
+  DATA16  Line
+  DATAS   Text 16
+
+  UI_BUTTON(SET_BACK_BLOCK,1)
+  MOVE32_32(SIZE,Size)
+
+  ARRAY(CREATE8,Size,hTextbox)
+  ARRAY(FILL,hTextbox,0)
+
+  UI_WRITE(TEXTBOX_APPEND,@hTextbox,Size,DEL_CRLF,'Line 1')
+  UI_WRITE(TEXTBOX_APPEND,@hTextbox,Size,DEL_CRLF,'Line 2')
+  UI_WRITE(TEXTBOX_APPEND,@hTextbox,Size,DEL_CRLF,'Line 3')
+  UI_WRITE(TEXTBOX_APPEND,@hTextbox,Size,DEL_CRLF,'Line 4')
+  UI_WRITE(TEXTBOX_APPEND,@hTextbox,Size,DEL_CRLF,'Line 5')
+  UI_WRITE(TEXTBOX_APPEND,@hTextbox,Size,DEL_CRLF,'Line 6')
+  UI_WRITE(TEXTBOX_APPEND,@hTextbox,Size,DEL_CRLF,'Line 7')
+  UI_WRITE(TEXTBOX_APPEND,@hTextbox,Size,DEL_CRLF,'Line 8')
+  UI_WRITE(TEXTBOX_APPEND,@hTextbox,Size,DEL_CRLF,'Line 9')
+  UI_WRITE(TEXTBOX_APPEND,@hTextbox,Size,DEL_CRLF,'Line 10')
+  UI_WRITE(TEXTBOX_APPEND,@hTextbox,Size,DEL_CRLF,'Line 11')
+  UI_WRITE(TEXTBOX_APPEND,@hTextbox,Size,DEL_CRLF,'Line 12')
+  UI_WRITE(TEXTBOX_APPEND,@hTextbox,Size,DEL_CRLF,'Line 13')
+  UI_WRITE(TEXTBOX_APPEND,@hTextbox,Size,DEL_CRLF,'Line 14')
+  UI_WRITE(TEXTBOX_APPEND,@hTextbox,Size,DEL_CRLF,'Line 15')
+
+Loop:
+
+  UI_DRAW(FILLWINDOW,0,0,0)
+
+  UI_DRAW(SELECT_FONT,TINY_FONT)
+  MOVE16_16(-1,Line)
+  UI_DRAW(TEXTBOX,10,10,158,100,@hTextbox,Size,DEL_CRLF,Line)
+
+  JR_LTEQ16(Line,0,Skip)
+
+  UI_READ(TEXTBOX_READ,@hTextbox,Size,DEL_CRLF,16,Line,Text)
+
+  UI_DRAW(TEXT,FG_COLOR,0,114,Text)
+  UI_DRAW(UPDATE)
+
+Skip:
+
+  UI_BUTTON(SET_BACK_BLOCK,0)
+
+End:
+  JR(End)
+
+  ARRAY(DELETE,hTextbox)
+}
+*/
+/*
+vmthread  MAIN
+{
+  DATAF   DataF
+  DATA32  Timer
+  DATA32  Counter
+
+
+Loop:
+  INPUT_DEVICE(GET_BUMPS,0,0,DataF)
+
+  UI_DRAW(FILLWINDOW,BG_COLOR,0,0)                                    //      UI_DRAW(FILLWINDOW,BG_COLOR,0,0)
+  UI_DRAW(VALUE,FG_COLOR,0,20,DataF,4,1)
+  UI_DRAW(UPDATE)
+
+  TIMER_WAIT(100,Timer)
+  TIMER_READY(Timer)
+
+  JR_TRUE(0,End)
+
+  ADD32(Counter,1,Counter)
+
+  JR(Loop)
+End:
+
+}
+*/
+/*
+vmthread  MAIN
+{
+  CALL(TestTextFileReadWrite)
+}
+
+
+subcall   TestTextFileReadWrite
+{
+  DATAF   Data1
+  DATAF   Data2
+  DATA32  Data32
+  DATA16  Handle
+  DATA8   Open
+  ARRAY8  Text 32
+
+
+  UI_WRITE(PUT_STRING,'\r\nTesting textfile write/read\r\n')
+  UI_WRITE(WRITE_FLUSH)
+
+  FILE(OPEN_WRITE,'tst.txt',Handle)
+  FILE(WRITE_TEXT,Handle,DEL_TAB,'[TAB]')
+  FILE(WRITE_TEXT,Handle,DEL_CRLF,'[CRLF]')
+
+  FILE(WRITE_VALUE,Handle,DEL_TAB,100.4F,6,1)
+  FILE(WRITE_VALUE,Handle,DEL_CRLF,10.04F,6,2)
+
+  FILE(WRITE_BYTES,Handle,6,'[LEGO]')
+
+  FILE(CLOSE,Handle)
+
+  FILE(OPEN_READ,'tst.txt',Handle,Data32)
+
+  FILE(READ_TEXT,Handle,DEL_TAB,32,Text)
+  UI_WRITE(PUT_STRING,Text)
+  UI_WRITE(PUT_STRING,'\r\n')
+  UI_WRITE(WRITE_FLUSH)
+
+  FILE(READ_TEXT,Handle,DEL_CRLF,32,Text)
+  UI_WRITE(PUT_STRING,Text)
+  UI_WRITE(PUT_STRING,'\r\n')
+  UI_WRITE(WRITE_FLUSH)
+
+  FILE(READ_VALUE,Handle,DEL_TAB,Data2)
+  UI_WRITE(VALUEF,Data2)
+  UI_WRITE(PUT_STRING,'\r\n')
+  UI_WRITE(WRITE_FLUSH)
+
+  FILE(READ_VALUE,Handle,DEL_CRLF,Data2)
+  UI_WRITE(VALUEF,Data2)
+  UI_WRITE(PUT_STRING,'\r\n')
+  UI_WRITE(WRITE_FLUSH)
+
+  FILE(READ_BYTES,Handle,6,Text)
+  WRITE8(0,6,Text)
+  UI_WRITE(PUT_STRING,Text)
+  UI_WRITE(PUT_STRING,'\r\n')
+  UI_WRITE(WRITE_FLUSH)
+
+  FILE(CLOSE,Handle)
+
+  FILE(OPEN_APPEND,'tst.txt',Handle)
+  FILE(WRITE_TEXT,Handle,DEL_TAB,'[TAB]')
+  FILE(WRITE_TEXT,Handle,DEL_CRLF,'[CRLF]')
+
+  FILE(WRITE_VALUE,Handle,DEL_TAB,300.4F,6,1)
+  FILE(WRITE_VALUE,Handle,DEL_CRLF,30.04F,6,2)
+
+  FILE(WRITE_BYTES,Handle,6,'[LEGO]')
+
+  FILE(GET_HANDLE,'tst.txt',Handle,Open)
+  UI_WRITE(PUT_STRING,'Open for write = ')
+  UI_WRITE(VALUE8,Open)
+  UI_WRITE(PUT_STRING,'\r\n')
+  UI_WRITE(WRITE_FLUSH)
+
+  FILE(CLOSE,Handle)
+
+  FILE(GET_HANDLE,'tst.txt',Handle,Open)
+  UI_WRITE(PUT_STRING,'Open for write = ')
+  UI_WRITE(VALUE8,Open)
+  UI_WRITE(PUT_STRING,'\r\n')
+  UI_WRITE(WRITE_FLUSH)
+
+  FILE(OPEN_READ,'tst.txt',Handle,Data32)
+
+  FILE(GET_HANDLE,'tst.txt',Handle,Open)
+  UI_WRITE(PUT_STRING,'Open for write = ')
+  UI_WRITE(VALUE8,Open)
+  UI_WRITE(PUT_STRING,'\r\n')
+  UI_WRITE(WRITE_FLUSH)
+
+  FILE(READ_TEXT,Handle,DEL_TAB,32,Text)
+  UI_WRITE(PUT_STRING,Text)
+  UI_WRITE(PUT_STRING,'\r\n')
+  UI_WRITE(WRITE_FLUSH)
+
+  FILE(READ_TEXT,Handle,DEL_CRLF,32,Text)
+  UI_WRITE(PUT_STRING,Text)
+  UI_WRITE(PUT_STRING,'\r\n')
+  UI_WRITE(WRITE_FLUSH)
+
+  FILE(READ_VALUE,Handle,DEL_TAB,Data2)
+  UI_WRITE(VALUEF,Data2)
+  UI_WRITE(PUT_STRING,'\r\n')
+  UI_WRITE(WRITE_FLUSH)
+
+  FILE(READ_VALUE,Handle,DEL_CRLF,Data2)
+  UI_WRITE(VALUEF,Data2)
+  UI_WRITE(PUT_STRING,'\r\n')
+  UI_WRITE(WRITE_FLUSH)
+
+  FILE(READ_BYTES,Handle,6,Text)
+  WRITE8(0,6,Text)
+  UI_WRITE(PUT_STRING,Text)
+  UI_WRITE(PUT_STRING,'\r\n')
+  UI_WRITE(WRITE_FLUSH)
+
+  FILE(READ_TEXT,Handle,DEL_TAB,32,Text)
+  UI_WRITE(PUT_STRING,Text)
+  UI_WRITE(PUT_STRING,'\r\n')
+  UI_WRITE(WRITE_FLUSH)
+
+  FILE(READ_TEXT,Handle,DEL_CRLF,32,Text)
+  UI_WRITE(PUT_STRING,Text)
+  UI_WRITE(PUT_STRING,'\r\n')
+  UI_WRITE(WRITE_FLUSH)
+
+  FILE(READ_VALUE,Handle,DEL_TAB,Data2)
+  UI_WRITE(VALUEF,Data2)
+  UI_WRITE(PUT_STRING,'\r\n')
+  UI_WRITE(WRITE_FLUSH)
+
+  FILE(READ_VALUE,Handle,DEL_CRLF,Data2)
+  UI_WRITE(VALUEF,Data2)
+  UI_WRITE(PUT_STRING,'\r\n')
+  UI_WRITE(WRITE_FLUSH)
+
+  FILE(READ_BYTES,Handle,6,Text)
+  WRITE8(0,6,Text)
+  UI_WRITE(PUT_STRING,Text)
+  UI_WRITE(PUT_STRING,'\r\n')
+  UI_WRITE(WRITE_FLUSH)
+
+  FILE(CLOSE,Handle)
+
+  FILE(REMOVE,'tst.txt')
+}
+*/
+
+
+
+/*
+vmthread  MAIN
+{
+  DATAF   DataF
+  DATA32  Timer
+  DATA32  Counter
+
+  OUTPUT_RESET(0,15)
+  MOVE32_32(0,Counter)
+
+Loop:
+  INPUT_READSI(0,0,32,0,DataF)
+
+  UI_DRAW(FILLWINDOW,BG_COLOR,0,0)                                    //      UI_DRAW(FILLWINDOW,BG_COLOR,0,0)
+  UI_DRAW(VALUE,FG_COLOR,0,20,DataF,4,1)
+  UI_DRAW(UPDATE)
+
+  TIMER_WAIT(100,Timer)
+  TIMER_READY(Timer)
+
+  JR_TRUE(0,End)
+
+  ADD32(Counter,1,Counter)
+
+  JR(Loop)
+End:
+
+}
+*/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*
+vmthread  MAIN
+{
+  CALL(TestTextFileReadWrite)
+  CALL(TestArrayCopy)
+}
+
+
+subcall   TestTextFileReadWrite
+{
+  DATAF   Data1
+  DATAF   Data2
+  DATA32  Data32
+  DATA16  Handle
+  DATAS   Text 32
+
+
+  UI_WRITE(PUT_STRING,'\r\nTesting textfile write/read\r\n')
+
+  FILE(OPEN_WRITE,'tst.txt',Handle)
+  FILE(WRITE_TEXT,Handle,DEL_TAB,'[TAB]')
+  FILE(WRITE_TEXT,Handle,DEL_CRLF,'[CRLF]')
+
+  FILE(WRITE_VALUE,Handle,DEL_TAB,100.4F,6,1)
+  FILE(WRITE_VALUE,Handle,DEL_CRLF,10.04F,6,2)
+
+  FILE(WRITE_BYTES,Handle,6,'[LEGO]')
+
+  FILE(CLOSE,Handle)
+
+  UI_DRAW(FILLWINDOW,BG_COLOR,0,0)                                    //      UI_DRAW(FILLWINDOW,BG_COLOR,0,0)
+
+  FILE(OPEN_READ,'tst.txt',Handle,Data32)
+
+  FILE(READ_TEXT,Handle,DEL_TAB,32,Text)
+  UI_WRITE(PUT_STRING,Text)
+  UI_WRITE(PUT_STRING,'\r\n')
+
+  FILE(READ_TEXT,Handle,DEL_CRLF,32,Text)
+  UI_WRITE(PUT_STRING,Text)
+  UI_WRITE(PUT_STRING,'\r\n')
+
+  FILE(READ_VALUE,Handle,DEL_TAB,Data2)
+  UI_WRITE(VALUEF,Data2)
+  UI_WRITE(PUT_STRING,'\r\n')
+
+  FILE(READ_VALUE,Handle,DEL_CRLF,Data2)
+  UI_WRITE(VALUEF,Data2)
+  UI_WRITE(PUT_STRING,'\r\n')
+
+  FILE(READ_BYTES,Handle,6,Text)
+  UI_WRITE(PUT_STRING,Text)
+  UI_WRITE(PUT_STRING,'\r\n')
+
+  FILE(CLOSE,Handle)
+
+  UI_WRITE(WRITE_FLUSH)
+
+  FILE(REMOVE,'tst.txt')
+}
+
+
+subcall   TestArrayCopy
+{
+  DATA16  hSource
+  DATA16  hDest
+  DATA16  Data16
+  DATA32  Data32
+  DATAF   DataF
+
+  UI_WRITE(PUT_STRING,'\r\nTesting array copy\r\n')
+
+// DATA8
+
+  UI_WRITE(PUT_STRING,'DATA8  ')
+
+  ARRAY(CREATE8,0,hSource)
+  ARRAY(CREATE8,0,hDest)
+
+  ARRAY_WRITE(hSource,0,0x54)
+  ARRAY_WRITE(hSource,1,0x50)
+  ARRAY_WRITE(hSource,2,0x0D)
+  ARRAY_WRITE(hSource,3,0x0A)
+  ARRAY_WRITE(hSource,4,0x00)
+
+  ARRAY(COPY,hSource,hDest)
+  UI_WRITE(PUT_STRING,@hDest)
+  UI_WRITE(WRITE_FLUSH)
+
+  ARRAY(SIZE,hDest,Data32)
+  UI_WRITE(PUT_STRING,'Size ')
+  UI_WRITE(VALUE32,Data32)
+  UI_WRITE(PUT_STRING,'\r\n')
+  UI_WRITE(WRITE_FLUSH)
+
+  ARRAY(DELETE,hDest)
+  ARRAY(DELETE,hSource)
+
+// DATA16
+
+  UI_WRITE(PUT_STRING,'DATA16 ')
+
+  ARRAY(CREATE16,0,hSource)
+  ARRAY(CREATE16,0,hDest)
+
+  ARRAY_WRITE(hSource,10,1024)
+
+  ARRAY(COPY,hSource,hDest)
+
+  ARRAY_READ(hDest,10,Data16)
+
+  UI_WRITE(VALUE16,Data16)
+  UI_WRITE(PUT_STRING,'\r\n')
+  UI_WRITE(WRITE_FLUSH)
+
+  ARRAY(DELETE,hDest)
+  ARRAY(DELETE,hSource)
+
+// DATA32
+
+  UI_WRITE(PUT_STRING,'DATA32 ')
+
+  ARRAY(CREATE32,0,hSource)
+  ARRAY(CREATE32,0,hDest)
+
+  ARRAY_WRITE(hSource,5,1000000)
+
+  ARRAY(COPY,hSource,hDest)
+
+  ARRAY_READ(hDest,5,Data32)
+
+  UI_WRITE(VALUE32,Data32)
+  UI_WRITE(PUT_STRING,'\r\n')
+  UI_WRITE(WRITE_FLUSH)
+
+  ARRAY(DELETE,hDest)
+  ARRAY(DELETE,hSource)
+
+// DATAF
+
+  UI_WRITE(PUT_STRING,'DATAF  ')
+
+  ARRAY(CREATEF,0,hSource)
+  ARRAY(CREATEF,0,hDest)
+
+  ARRAY_WRITE(hSource,8,1.234F)
+
+  ARRAY(COPY,hSource,hDest)
+
+  ARRAY_READ(hDest,8,DataF)
+
+  UI_WRITE(VALUEF,DataF)
+  UI_WRITE(PUT_STRING,'\r\n')
+  UI_WRITE(WRITE_FLUSH)
+
+  ARRAY(DELETE,hDest)
+  ARRAY(DELETE,hSource)
+
+
+
+
+}
+*/
+/*
+define    STR_LEN       20
+define    NO_OF_STR     10
+define    STR_ARR_LEN   (STR_LEN * NO_OF_STR)
+
+ARRAY8    StringArray   STR_ARR_LEN
+
+
+
+vmthread MAIN
+{
+  DATA32  pStr
+  DATA16  Cnt
+
+  // Create
+
+
+  // Init
+  GET_ADDR(StringArray,0,STR_LEN,pStr)
+  STRINGS(DUPLICATE,'First',&pStr)
+
+  GET_ADDR(StringArray,1,STR_LEN,pStr)
+  STRINGS(DUPLICATE,'Second',&pStr)
+
+  GET_ADDR(StringArray,2,STR_LEN,pStr)
+  STRINGS(DUPLICATE,'Third',&pStr)
+
+
+  // Use
+  MOVE16_16(0,Cnt)
+Loop:
+  GET_ADDR(StringArray,Cnt,STR_LEN,pStr)
+  UI_WRITE(PUT_STRING,&pStr)
+  UI_WRITE(PUT_STRING,'\r\n')
+  ADD16(1,Cnt,Cnt)
+  JR_LT32(Cnt,3,Loop)
+  UI_FLUSH()
+
+
+  // Exit  
+}
+*/
+/*
+define    STR_LEN       20
+define    NO_OF_STR     10
+
+vmthread MAIN
+{
+  DATA16  hStringArray
+  DATA16  hTmp
+  DATA32  Cnt
+
+  // Create
+  ARRAY(CREATE16,NO_OF_STR,hStringArray)
+  MOVE32_32(0,Cnt)
+Loop1:
+  ARRAY(CREATE8,STR_LEN,hTmp)
+  ARRAY_WRITE(hStringArray,Cnt,hTmp)
+  ADD32(1,Cnt,Cnt)
+  JR_LT32(Cnt,NO_OF_STR,Loop1)
+
+
+  // Init
+  ARRAY_READ(hStringArray,0,hTmp)
+  STRINGS(DUPLICATE,'First',@hTmp)
+  
+  ARRAY_READ(hStringArray,1,hTmp)
+  STRINGS(DUPLICATE,'Second',@hTmp)
+  
+  ARRAY_READ(hStringArray,2,hTmp)
+  STRINGS(DUPLICATE,'Third',@hTmp)
+  
+
+  // Use
+  MOVE32_32(0,Cnt)
+Loop2:
+  ARRAY_READ(hStringArray,Cnt,hTmp)
+  UI_WRITE(PUT_STRING,@hTmp)
+  UI_WRITE(PUT_STRING,'\r\n')
+  ADD32(1,Cnt,Cnt)
+  JR_LT32(Cnt,3,Loop2)
+  UI_FLUSH()
+  
+
+  // Exit
+  MOVE32_32(0,Cnt)
+Loop3:
+  ARRAY_READ(hStringArray,Cnt,hTmp)
+  ARRAY(DELETE,hTmp)
+  ADD32(1,Cnt,Cnt)
+  JR_LT32(Cnt,NO_OF_STR,Loop3)
+  ARRAY(DELETE,hStringArray)
+}
+*/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*
+vmthread MAIN
+{
+  DATAF   DataF
+
+  OUTPUT_RESET(0,15)
+  Loop:
+    INPUT_DEVICE(READY_SI,0,0,30,0,1,DataF)
+    UI_DRAW(FILLWINDOW,BG_COLOR,0,0)                                    //      UI_DRAW(FILLWINDOW,BG_COLOR,0,0)
+    UI_DRAW(VALUE,FG_COLOR,16,16,DataF,4,1)
+    UI_DRAW(UPDATE)
+  JR(Loop)
+}
+*/

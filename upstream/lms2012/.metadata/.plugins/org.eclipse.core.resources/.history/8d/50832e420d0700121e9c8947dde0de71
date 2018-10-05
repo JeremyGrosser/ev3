@@ -1,0 +1,527 @@
+#******************************************************************************************************************
+#     FIRST INIT OF LEGOBOARD (slh tool) DaVinci-PSP-SDK-03.20.00.13/
+#******************************************************************************************************************
+# on linux PC, bootmode = UART, mono installed
+
+cd ~/lms2012_setup
+
+
+cp ~/am1808/DaVinci-PSP-SDK-03.20.00.13/src/u-boot/uboot-03.20.00.13/u-boot.bin LEGOBoard/u-boot.bin
+
+
+mono HexAIS_OMAP-L138.exe -ini LEGOBoard/OMAP-L138_LEGO_uart.ini -o LEGOBoard/u-boot-v1.hexais.lego
+
+mono HexAIS_OMAP-L138.exe -ini LEGOBoard/OMAP-L138_LEGO_spi.ini -o LEGOBoard/u-boot-v1-spi.hexais.lego  
+
+# download U_BOOT into external RAM
+
+- hold reset down -
+
+mono slh_OMAP-L138.exe -waitForDevice LEGOBoard/u-boot-v1.hexais.lego
+
+mono slh_OMAP-L138.exe -waitForDevice LEGOBoard/u-boot-v1.hexais.lego -p /dev/ttyUSB0
+
+
+- release reset -
+
+
+
+# insert SDcard into PC
+
+./mmc_copy
+
+
+# in uBoot on board:
+
+mmcinfo
+
+fatload mmc 0 c0700000 u-boot-v1-spi.hexais.lego
+
+fatload mmc 0 c0700000 uBoot
+
+
+sf probe 0
+sf erase 0 0x40000
+sf write 0xC0700000 0 0x40000
+
+fatload mmc 0 0xc0700000 uImage
+
+sf erase 0x80000 0x200000
+sf write 0xc0700000 0x80000 0x200000
+
+setenv bootargs mem=32M console=ttyS1,115200n8 noinitrd root=/dev/mmcblk0p2 rootwait rw ip=off
+setenv bootdelay 3
+saveenv
+
+
+#******************************************************************************************************************
+#     BOOTARGS
+#******************************************************************************************************************
+# as root on board:
+
+setenv bootargs mem=16M console=ttyS1,115200n8 noinitrd root=/dev/mmcblk0p2 rootwait rw ip=10.131.145.223
+
+
+
+#******************************************************************************************************************
+#     BOOTARGS
+#******************************************************************************************************************
+# as root on board:
+
+# LEGO board running NFS at LEGO tcp
+
+setenv bootargs console=ttyS1,115200n8 noinitrd rw ip=10.131.145.223 root=/dev/nfs nfsroot=10.131.145.222:/home/tcp/am1808/DaVinci-PSP-SDK-03.20.00.13/filesys,nolock,rsize=1024 mem=32M quiet
+
+# LEGO board running NFS at LEGO
+
+setenv bootargs console=ttyS1,115200n8 noinitrd rw ip=10.131.145.223 root=/dev/nfs nfsroot=10.131.145.220:/home/tcp/am1808/DaVinci-PSP-SDK-03.20.00.13/filesys,nolock,rsize=1024 mem=32M
+
+# LEGO board running NFS at LEGO extra computer
+
+setenv bootargs console=ttyS1,115200n8 noinitrd rw ip=10.131.145.223 root=/dev/nfs nfsroot=10.131.145.199:/home/lego/am1808/DaVinci-PSP-SDK-03.20.00.13/filesys,nolock,rsize=1024 mem=32M
+
+# LEGO board running NFS at LEGO PC's computer
+
+setenv bootargs console=ttyS1,115200n8 noinitrd rw ip=10.131.145.101 root=/dev/nfs nfsroot=10.131.145.100:/home/per/am1808/DaVinci-PSP-SDK-03.20.00.13/filesys,nolock,rsize=1024 mem=32M
+
+# LEGO board running NFS in FARRE
+
+setenv bootargs console=ttyS1,115200n8 noinitrd rw ip=192.168.1.89 root=/dev/nfs nfsroot=192.168.1.76:/home/tcp/am1808/DaVinci-PSP-SDK-03.20.00.13/filesys,nolock,rsize=1024 mem=32M
+
+
+# LEGO board running from SDCARD (kernel + FS)
+
+setenv bootargs mem=32M console=ttyS1,115200n8 noinitrd root=/dev/mmcblk0p2 rootwait rw ip=off quiet
+
+# LEGO board running from FLASH (kernel + FS)
+
+setenv bootargs mem=32M console=ttyS1,115200n8 root=/dev/ram0 rw initrd=0xc1180000,9M ip=off
+
+setenv bootargs mem=32M console=ttyS1,115200n8 root=/dev/ram0 rw initrd=0xc1180000,9M ip=10.131.145.223
+
+
+
+# LEGO board running from SDCARD (kernel + FS) with USB ethernet at LEGO
+
+setenv bootargs mem=32M console=ttyS1,115200n8 noinitrd root=/dev/mmcblk0p2 rootwait rw ip=10.131.145.223
+
+
+
+
+# LEGO board running from SDCARD if pressent else NFS at LEGO
+
+setenv bootcmd 'if mmc rescan 0; then if fatload mmc 0 0xc0600000 boot.scr; then source 0xc0600000; else fatload mmc 0 0xc0700000 uImage; bootm c0700000; fi; else sf probe 0; sf read 0xc0700000 0x80000 0x220000; bootm 0xc0700000; fi'
+
+setenv bootargs mem=32M console=ttyS1,115200n8 ip=10.131.145.223 'if mmc rescan 0; then noinitrd root=/dev/mmcblk0p2 rootwait rw ; else root=/dev/nfs nfsroot=10.131.145.222:/home/tcp/am1808/DaVinci-PSP-SDK-03.20.00.13/filesys,nolock,rsize=1024 fi'
+
+
+
+
+
+
+
+
+
+setenv bootcmd 'if mmc rescan 0; then fatload mmc 0 0xc0700000 uImage; setenv bootargs console=ttyS2,115200n8 rw noinitrd ip=10.131.145.223 root=/dev/mmcblk0p2 rootfstype=ext3 rootwait; bootm c0700000; else sf probe 0; sf read 0xc0700000 0x80000 0x220000;setenv bootargs console=ttyS1,115200n8 rw noinitrd ip=10.131.145.223 root=/dev/nfs nfsroot=10.131.145.222:/home/tommy/am1808/DaVinci-PSP-SDK-03.20.00.13/filesys,nolock,rsize=1024 mem=32M; bootm 0xc0700000; fi'
+
+
+
+
+
+setenv dosd fatload mmc 0 0xc0700000 uImage; setenv bootargs console=ttyS2,115200n8 rw noinitrd ip=10.131.145.223 root=/dev/mmcblk0p2 rootfstype=ext3 rootwait;
+
+setenv donfs sf probe 0; sf read 0xc0700000 0x80000 0x220000;setenv bootargs console=ttyS1,115200n8 rw noinitrd ip=10.131.145.223 root=/dev/nfs nfsroot=10.131.145.222:/home/tommy/am1808/DaVinci-PSP-SDK-03.20.00.13/filesys,nolock,rsize=1024 mem=32M;
+
+
+
+
+
+
+
+
+setenv bootargs mem=32M console=ttyS1,115200n8 ip=10.131.145.223 'if mmc rescan 0; then root=/dev/mmcblk0p2 rootwait ; else root=/dev/nfs nfsroot=10.131.145.222:/home/tcp/am1808/DaVinci-PSP-SDK-03.20.00.13/filesys,nolock,rsize=1024 fi'
+
+if fi
+
+
+
+
+bootargs_sd=console=ttyS1,115200n8 root=/dev/mmcblk0p2 ip=10.131.145.223 mem=32M
+
+bootcmd_sd=setenv bootargs $(bootargs_sd)
+
+bootargs_nfs=console=ttyS1,115200n8 noinitrd rw ip=10.131.145.223 root=/dev/nfs nfsroot=10.131.145.222:/home/tcp/am1808/DaVinci-PSP-SDK-03.20.00.13/filesys,nolock,rsize=1024 mem=32M
+
+bootcmd_nfs=setenv bootargs $(bootargs_nfs)
+
+bootcmd=run bootcmd_sd; run bootcmd_nfs
+
+
+
+
+
+
+
+
+
+
+
+
+
+bootargs_sd=console=ttyS0,115200 ro root=/dev/mmcblk0p1 rootdelay=1
+
+bootcmd_sd=setenv bootargs $(bootargs_sd); mmcinit; ext2load mmc 0 0x800000 /boot/uImage; bootm 0x800000
+
+
+
+
+bootargs_nand=console=ttyS0,115200 rw root=/dev/mtdblock2 rootfstype=jffs2
+
+bootcmd_nand=setenv bootargs $(bootargs_nand); nand read.e 0x800000 0x100000 0x400000; bootm 0x800000
+
+
+
+bootcmd=run bootcmd_sd; run bootcmd_nand
+
+
+#******************************************************************************************************************
+#     FORMAT SDCARD
+#******************************************************************************************************************
+# as normal user on linux pc terminal:
+
+#insert sdcard
+
+#UNMOUT THE SDCARD BEFORE NEXT STEP
+
+#identify the sdcard - maybe mmcblk0 or sdb but be SURE
+cat /proc/partitions
+
+#start fdisk
+sudo fdisk /dev/sdb
+
+#display partitions
+p
+
+#delete partition 1
+d
+1
+
+#delete ALL partions before next step
+
+#make new partition
+n
+p
+1
+[cr]
++50M
+t
+b
+n
+p
+2
+[cr]
+[cr]
+
+#check partition
+p
+
+#execute changed
+w
+
+
+#format sdcard
+
+sudo mkfs.msdos -n LMS2012 /dev/sdb
+
+sudo mkfs.ext3 -L LMS2012_EXT /dev/sdb2
+
+
+#******************************************************************************************************************
+#     FILESYSTEM IN FLASH (16MB)
+#******************************************************************************************************************
+# as normal user on linux pc terminal:
+
+##### Create empty ram disc
+
+cd ~
+
+sudo dd if=/dev/zero of=/dev/ram0 bs=1k count=16384
+
+sudo mke2fs -vm0 /dev/ram0 16384
+
+sudo tune2fs -c 0 /dev/ram0
+
+sudo dd if=/dev/ram0 bs=1k count=16384 | gzip -v9 > lego_ramdisk.gz
+
+
+##### Mount empty ram disc
+
+cd ~
+
+mkdir lego_mnt
+
+sudo rm -r lego_mnt/*
+
+sudo gunzip lego_ramdisk.gz
+
+sudo mount -o loop lego_ramdisk lego_mnt/
+
+
+##### Fill empty ram disc
+
+sudo cp -r ~/am1808/DaVinci-PSP-SDK-03.20.00.13/filesys_v040/* lego_mnt
+
+sudo cp -r ~/am1808/DaVinci-PSP-SDK-03.20.00.13/filesys/usr/lib/libbluetooth* lego_mnt/usr/lib
+
+sudo rm -r ~/lego_mnt/home/root/*
+
+sudo mkdir ~/lego_mnt/home/root/lms2012
+
+sudo cp -r ~/projects/lms2012/lms2012/Linux_AM1808/* ~/lego_mnt/home/root/lms2012
+
+
+##### Insert scripts
+
+sudo cp ~/projects/lms2012/lms2012/Linux_AM1808/sys/lms ~/lego_mnt/etc/init.d/BT_Init.sh
+sudo cp ~/projects/lms2012/lms2012/Linux_AM1808/sys/lms ~/lego_mnt/etc/init.d/lms
+
+cd ~/lego_mnt/etc/rc5.d
+sudo ln -s ../init.d/BT_Init.sh S25bt
+sudo ln -s ../init.d/lms S99lms
+cd ~
+
+
+##### Zip file system
+
+sudo umount lego_mnt
+
+sudo gzip -v9 lego_ramdisk
+
+
+##### Copy ram disc to sdcard
+
+sudo cp lego_ramdisk.gz /media/LMS2012/
+
+sync
+
+
+##### as root on LEGO board running UBOOT
+
+
+##### Copy kernel to flash
+
+sf probe 0
+
+mmcinfo
+
+fatload mmc 0 0xc0700000 uImage
+
+sf erase 0x80000 0x200000
+
+sf write 0xc0700000 0x80000 0x200000
+
+
+##### Copy file system to flash
+
+sf probe 0
+
+mmcinfo
+
+fatload mmc 0 c1180000 lego_ramdisk.gz
+
+sf erase 0x280000 0x900000
+
+sf write 0xc1180000 0x280000 0x900000
+
+
+##### Set environmant
+
+setenv bootargs mem=32M console=ttyS1,115200n8 root=/dev/ram0 rw initrd=0xc1180000,9M ip=10.131.145.223
+
+setenv bootcmd 'sf probe 0;sf read 0xc0700000 0x80000 0x200000;sf read 0xc1180000 0x280000 0x900000;bootm 0xc0700000'
+
+saveenv
+
+boot
+
+
+
+
+
+
+
+
+
+#******************************************************************************************************************
+#     FILESYSTEM IN FLASH (16MB)
+#******************************************************************************************************************
+# as normal user on linux pc terminal:
+
+##### Create empty ram disc
+
+cd ~
+
+sudo dd if=/dev/zero of=/dev/ram0 bs=1k count=16384
+
+sudo mke2fs -vm0 /dev/ram0 16384
+
+sudo tune2fs -c 0 /dev/ram0
+
+sudo dd if=/dev/ram0 bs=1k count=16384 | gzip -v9 > lego_ramdisk.gz
+
+
+##### Get filesystem from TI
+
+cd ~
+
+mkdir mnt
+
+sudo gunzip ramdisk_udev_lego_16M_v1.gz
+
+sudo mount -o loop ramdisk_udev_lego_16M_v1 mnt/
+
+
+##### Fill empty ram disc
+
+cd ~
+
+mkdir lego_mnt
+
+sudo rm -r lego_mnt/*
+
+sudo gunzip lego_ramdisk.gz
+
+sudo mount -o loop lego_ramdisk lego_mnt/
+
+
+/*
+sudo cp ~/projects/lms2012/lms2012/Linux_AM1808/lms ~/am1808/DaVinci-PSP-SDK-03.20.00.13/filesys/etc/init.d/lms
+
+cd ~/am1808/DaVinci-PSP-SDK-03.20.00.13/filesys/etc/rc5.d
+sudo ln -s ../init.d/lms S99lms
+cd ~
+*/
+
+
+sudo cp -r ~/am1808/DaVinci-PSP-SDK-03.20.00.13/filesys/* lego_mnt
+
+sudo umount lego_mnt
+
+sudo gzip -v9 lego_ramdisk
+
+sudo cp lego_ramdisk.gz /media/LMS2012/
+
+# test ram disc
+# as root on LEGO board running UBOOT
+
+mmcinfo
+
+fatload mmc 0 c0700000 uimage
+
+fatload mmc 0 c1180000 lego_ramdisk.gz
+
+setenv bootargs "mem=32M console=ttyS1,115200n8 root=/dev/ram0 rw initrd=0xc1180000,9M ip=off"
+
+bootm
+
+##### FS to flash
+
+sf probe 0
+
+mmcinfo
+
+fatload mmc 0 0xc0700000 uImage
+
+sf erase 0x80000 0x200000
+
+sf write 0xc0700000 0x80000 0x200000
+
+fatload mmc 0 c1180000 lego_ramdisk.gz
+
+sf erase 0x280000 0x900000
+
+sf write 0xc1180000 0x280000 0x900000
+
+
+setenv bootargs mem=32M console=ttyS1,115200n8 root=/dev/ram0 rw initrd=0xc1180000,9M ip=off
+
+setenv bootcmd 'sf probe 0;sf read 0xc0700000 0x80000 0x200000;sf read 0xc1180000 0x280000 0x900000;bootm 0xc0700000'
+
+saveenv
+
+boot
+
+
+setenv bootargs mem=32M console=ttyS1,115200n8 root=/dev/ram0 rw initrd=0xc1180000,9M ip=10.131.145.223
+
+
+
+
+*******************************************************************************************************************
+*     MAKE VM START AUTOMATICALLY AFTER BOOT
+*******************************************************************************************************************
+as normal user on linux pc terminal - insert sdcard:
+
+(copy lms bash file to sdcard)
+sudo cp ~/projects/lms2012/lms2012/Linux_AM1808/sys/lms /media/LMS2012_EXT/etc/init.d/lms
+
+(make link in runlevel 5)
+cd /media/LMS2012_EXT/etc/rc5.d
+sudo ln -s ../init.d/lms S99lms
+cd ~
+
+
+
+
+*******************************************************************************************************************
+*     VARIOUS STUFF
+*******************************************************************************************************************
+
+Eclipse Helios
+
+    * Select Run->Debug Configurations....
+    * In the list, double click C/C++ Application to make your new project appear and select it
+    * Click on the Debugger tab. Here is the new bit: the default process launcher does not allow you to specify gdbserver as it used to. So, look for Using GDB (DSF) Create Process Launcher and click Select other...
+    * In the “Select Preferred Launcher” window, tick Use configuration specific settings and then select Standard Create Process Launcher and then click OK
+    * Now on the Debugger tab there is an item named Debugger which is set to gbd/mi. Change that to gdbserver
+    * Set GDB debugger to arm-angstrom-linux-gnueabi-gdb
+    * On the Connection tab:
+    * Set Type to TCP
+    * Set Host name or IP address to 192.168.1.101
+    * Set Port number to 2001
+    * Click Apply
+    * Click Debug to start the session 
+
+
+sudo cp /media/LMS2012_EXT/home/root/lms2012/usrprg/prg4 /home/tommy/am1808/DaVinci-PSP-SDK-03.20.00.13/filesys/home/root/lms2012/usrprg/prg4
+
+
+sudo apt-get install picocom
+
+picocom -b 115200 -r -l /dev/ttyUSB0
+
+# RENAME MULTIPLE FILES
+rename -v 's/\.htm$/\.html/' *.htm
+
+
+
+bootcmd=if mmc rescan 0; then if fatload mmc 0 0xc0600000 boot.scr; then source 0xc0600000; else fatload mmc 0 0xc0700000 uImage; bootm c0700000; fi; else sf probe 0; sf read 0xc0700000 0x80000 0x220000; bootm 0xc0700000; fi
+bootdelay=3
+baudrate=115200
+bootfile="uImage"
+bootargs=mem=32M console=ttyS1,115200n8 noinitrd root=/dev/mmcblk0p2 rootwait rw ip=10.131.145.223
+stdin=serial
+stdout=serial
+stderr=serial
+ver=U-Boot 2009.11 (Feb 09 2012 - 09:31:52)
+
+
+
+
+
+
+
+tar -zcvf tst.gz *
+
+
+

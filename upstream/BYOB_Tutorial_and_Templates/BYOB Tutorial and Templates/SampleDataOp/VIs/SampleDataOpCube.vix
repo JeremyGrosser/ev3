@@ -1,0 +1,27 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<SourceFile Version="1.0.2.10" xmlns="http://www.ni.com/SourceModel.xsd">
+    <Namespace Name="Project">
+        <VirtualInstrument IsTopLevel="false" IsReentrant="false" Version="1.0.2.0" xmlns="http://www.ni.com/VirtualInstrument.xsd">
+            <DataItem Name="SequenceIn" DataType="NationalInstruments:SourceModel:DataTypes:X3SequenceWireDataType" DefaultTerminalDirection="Output" CallUsage="None" CallDirection="Input" CallIndex="0" AdaptToDiagramType="true" />
+            <DataItem Name="SequenceOut" DataType="NationalInstruments:SourceModel:DataTypes:X3SequenceWireDataType" DefaultTerminalDirection="Input" CallUsage="None" CallDirection="Output" CallIndex="0" AdaptToDiagramType="true" />
+            <DataItem Name="Input" DataType="Single" DefaultTerminalDirection="Output" CallUsage="None" CallDirection="Input" CallIndex="1" />
+            <DataItem Name="Output" DataType="Single" DefaultTerminalDirection="Output" CallUsage="None" CallDirection="Output" CallIndex="1" />
+            <FrontPanel>
+                <fpruntime:FrontPanelCanvas xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:fpruntime="clr-namespace:NationalInstruments.LabVIEW.FrontPanelRuntime;assembly=NationalInstruments.LabVIEW.FrontPanelRuntime" xmlns:Model="clr-namespace:NationalInstruments.SourceModel.Designer;assembly=NationalInstruments.SourceModel" x:Name="FrontPanel" Model:DesignerSurfaceProperties.CanSnapToObjects="True" Model:DesignerSurfaceProperties.SnapToObjects="True" Model:DesignerSurfaceProperties.ShowSnaplines="True" Model:DesignerSurfaceProperties.ShowControlAdorners="True" Width="640" Height="480" />
+            </FrontPanel>
+            <BlockDiagram Name="__RootDiagram__">
+                <Wire Id="w7" Joints="N(n6:x\*y) N(n2:Numeric)" />
+                <Wire Id="w5" Joints="N(n1:Numeric) h(16) N(n4:x) B(1) v(14) N(n4:y) B(3) v(14) N(n6:y)" />
+                <Wire Id="w8" Joints="N(n4:x\*y) h(7) v(7) N(n6:x)" />
+                <DataAccessor DataItem="Input" Id="n1" Bounds="280 203 70 14">
+                    <Terminal Id="Numeric" Direction="Output" Wire="w5" Hotspot="1 0.5" Bounds="0 0 70 14" />
+                </DataAccessor>
+                <DataAccessor DataItem="Output" Id="n2" Bounds="469 224 70 14">
+                    <Terminal Id="Numeric" Direction="Input" Wire="w7" Hotspot="0 0.5" Bounds="0 0 70 14" />
+                </DataAccessor>
+                <Multiply Id="n4" Terminals="x\*y=w8, y=w5, x=w5" TopLeft="385 203" />
+                <Multiply Id="n6" Terminals="x\*y=w7, y=w5, x=w8" TopLeft="427 217" />
+            </BlockDiagram>
+        </VirtualInstrument>
+    </Namespace>
+</SourceFile>

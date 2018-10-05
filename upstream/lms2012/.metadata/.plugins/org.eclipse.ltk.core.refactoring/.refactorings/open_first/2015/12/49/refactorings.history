@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename resource &apos;open_first/lmsfs.tar.bz2&apos; to &apos;lmsfs_with_telnet.tar.bz2&apos;" description="Rename resource &apos;lmsfs.tar.bz2&apos;" flags="7" id="org.eclipse.ltk.core.refactoring.rename.resource" input="lmsfs.tar.bz2" name="lmsfs_with_telnet.tar.bz2" stamp="1449129348541" updateReferences="true"/>
+</session>

@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<EditorStrings>
+  <PolyGroups ModuleName="SampleDataOp">
+	<PolyGroup Name="SampleDataOp" DisplayName="Sample Data Operations" DisplayNamePrefix="SampleDataOp">
+      <Parameter Name="Input" DisplayName="Input" >
+        <Description><![CDATA[<p>Context help for Input</p>]]></Description>
+      </Parameter>
+      <Parameter Name="Output" DisplayName="Output">
+        <Description><![CDATA[<p>Context help for Output</p>]]></Description>
+      </Parameter>
+      <Block Mode="Reciprocal" DisplayName="Reciprocal">
+        <Description><![CDATA[<p>Context help for Reciprocal</p>]]></Description>
+      </Block>
+      <Block Mode="Cube" DisplayName="Cube">
+        <Description><![CDATA[<p>Context help for Cube</p>]]></Description>
+      </Block> 
+    </PolyGroup>
+  </PolyGroups>
+</EditorStrings>

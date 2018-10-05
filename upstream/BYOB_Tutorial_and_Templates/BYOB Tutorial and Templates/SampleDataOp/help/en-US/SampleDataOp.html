@@ -1,0 +1,54 @@
+<html>
+<head>
+<title>Sample Data Operations Block</title>
+</head>
+<body BGCOLOR="FFFFFF">
+<p>For more information about block in general and how to create them see the "Creating Blocks for LEGO Mindstorms EV3.html" file that came with this package.</p>
+<h1>Sample Data Operations Block</h1>
+<img src="SampleDataOp.png" width="68" height="68" />
+<p> The Sample Data Operations block adds two more math functions to EV3. It does not require any hardware and is provided to demonstrate the minimum necessary requirements for a data operations block in the Mindstorms EV3 environment.
+<br><br>
+When you have the context help window open and you hover over the Sample Data Operations block on a diagram, EV3 automatically generates links to this page based on exactly what your mouse is over. EV3 uses information gathered from the block's two "blocks.xml" files to create these URLs. You access these links by clicking "More Information" within the context help window.
+<br><br>
+The two blocks.xml files work together. One, which we will refer to as the "Main" blocks.xml is primarily programmatic in nature and serves to define the blocks behaviors and capabilities. It lives in the root directory for the given block. The other is used for mapping the programmatic modes and parameters to user visible strings and to provide context help information for the block. We wil refer to it as the "Strings" block.xml files. It lives in a language specific folder beneath the strings folder in the block's directory.
+<br><br>
+Each item below is an html anchor or destination targetted by the "More Information" link in the context help window. Instead of describing the particular mode or parameter, we will discuss how each URL was created by the help system.
+</p>
+<h2>Modes</h2>
+<a name="Mode_Reciprocal"></a>
+<h3>Reciprocal</h3>
+<p>
+The link to this section is "http://localhost:58401/localizedMapping_B90BDB05-F70E-4B0B-8CEA-031DCF197215/en-US/editor/page.html?Path=blocks%2fSampleDataOp%2fSampleDataOp.html#Mode_Reciprocal".
+<br><br>
+The important part is the "Path" parameter after the question mark - "blocks/SampleDataOp/SampleDataOp.html#Mode_Reciprocal". Let's look at each part of this path.
+<br><br>
+All blocks are stored in the "blocks" directory. This is located in "<i>&ltyour EV3 install directory&gt</i>/Resources".<br>
+The subfolder "SampleDataOp" is named using the "ModuleName" attribute from the "PolyGroups" section in either blocks.xml file (they should be the same). In our case the line reads "&ltPolyGroups ModuleName="SampleDataOp"&gt".<br>
+The help file name itself is also derived from the ModuleName, as in <i>&ltModuleName&gt</i>.html.<br>
+Finally, the anchor for the mode is built by concatenating "#Mode_" with the value of the "Mode" element for the particular mode within the Main blocks.xml file.
+<br><br>
+To locate the mode element, consider the following. The Main blocks.html file defines one or more programming blocks. At the highest level there is the "PolyGroups" element and its ModuleName attribute. "SampleDataOp" is our ModuleName. All the blocks defined in this file (or Module) get imported, exported, or removed at the same time in the Block Import wizard.<br>
+Within the PolyGroups element there can be one or more "PolyGroup" elements. At the user level we refer to these as "blocks" because they are what lives in the palette for us to place on the diagram but internally they are actually collections of blocks called a PolyGroup. Inside a PolyGroup there are one or more "Block" elements, each having a "Mode" element where we define the programmatic name for the given mode.
+</p>
+<a name="Mode_Cube"></a>
+<h3>Cube</h3>
+<p>
+The link to this section is "http://localhost:58401/localizedMapping_B90BDB05-F70E-4B0B-8CEA-031DCF197215/en-US/editor/page.html?Path=blocks%2fSampleDataOp%2fSampleDataOp.html#Mode_Cube".
+<br>
+It was formed using the same recipe as above.
+</p>
+
+<h2>Parameters</h2>
+<a name="Parameters"></a>
+<h3>Input, Output</h3>
+<p>
+The link to this section is "http://localhost:58401/localizedMapping_B90BDB05-F70E-4B0B-8CEA-031DCF197215/en-US/editor/page.html?Path=blocks%2fSampleDataOp%2fSampleDataOp.html#Parameters".
+<br>
+EV3 does not form links for individual parameters, instead, all parameters are expected to reside underneath a "Parameters" anchor.
+</p>
+<p>
+<b>Input</b> is the number to be operated upon.<br>
+<b>Output</b> is the result of that operation.<br>
+</p>
+</body>
+</html>

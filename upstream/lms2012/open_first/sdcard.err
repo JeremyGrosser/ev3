@@ -1,0 +1,213 @@
+
+WARNING: DOS-compatible mode is deprecated. It's strongly recommended to
+         switch off the mode (command 'c') and change display units to
+         sectors (command 'u').
+
+Command (m for help): 
+Disk /dev/sde: 1967 MB, 1967128576 bytes
+37 heads, 56 sectors/track, 1854 cylinders
+Units = cylinders of 2072 * 512 = 1060864 bytes
+Sector size (logical/physical): 512 bytes / 512 bytes
+I/O size (minimum/optimal): 512 bytes / 512 bytes
+Disk identifier: 0x00000000
+
+   Device Boot      Start         End      Blocks   Id  System
+/dev/sde1               1          50       51772    b  W95 FAT32
+/dev/sde2              51         249      206164   83  Linux
+
+Command (m for help): Partition number (1-4): 
+Command (m for help): Selected partition 2
+
+Command (m for help): 2: unknown command
+Command action
+   a   toggle a bootable flag
+   b   edit bsd disklabel
+   c   toggle the dos compatibility flag
+   d   delete a partition
+   l   list known partition types
+   m   print this menu
+   n   add a new partition
+   o   create a new empty DOS partition table
+   p   print the partition table
+   q   quit without saving changes
+   s   create a new empty Sun disklabel
+   t   change a partition's system id
+   u   change display/entry units
+   v   verify the partition table
+   w   write table to disk and exit
+   x   extra functionality (experts only)
+
+Command (m for help): 
+Disk /dev/sde: 1967 MB, 1967128576 bytes
+37 heads, 56 sectors/track, 1854 cylinders
+Units = cylinders of 2072 * 512 = 1060864 bytes
+Sector size (logical/physical): 512 bytes / 512 bytes
+I/O size (minimum/optimal): 512 bytes / 512 bytes
+Disk identifier: 0x00000000
+
+   Device Boot      Start         End      Blocks   Id  System
+
+Command (m for help): Command action
+   e   extended
+   p   primary partition (1-4)
+Partition number (1-4): First cylinder (1-1854, default 1): Last cylinder, +cylinders or +size{K,M,G} (1-1854, default 1854): 
+Command (m for help): Selected partition 1
+Hex code (type L to list codes): Changed system type of partition 1 to b (W95 FAT32)
+
+Command (m for help): Command action
+   e   extended
+   p   primary partition (1-4)
+Partition number (1-4): First cylinder (51-1854, default 51): Using default value 51
+Last cylinder, +cylinders or +size{K,M,G} (51-1854, default 1854): 
+Command (m for help): 
+Disk /dev/sde: 1967 MB, 1967128576 bytes
+37 heads, 56 sectors/track, 1854 cylinders
+Units = cylinders of 2072 * 512 = 1060864 bytes
+Sector size (logical/physical): 512 bytes / 512 bytes
+I/O size (minimum/optimal): 512 bytes / 512 bytes
+Disk identifier: 0x00000000
+
+   Device Boot      Start         End      Blocks   Id  System
+/dev/sde1               1          50       51772    b  W95 FAT32
+/dev/sde2              51         249      206164   83  Linux
+
+Command (m for help): The partition table has been altered!
+
+Calling ioctl() to re-read partition table.
+
+WARNING: If you have created or modified any DOS 6.x
+partitions, please see the fdisk manual page for additional
+information.
+Syncing disks.
+mkfs.msdos 3.0.9 (31 Jan 2010)
+mke2fs 1.41.12 (17-May-2010)
+Filesystem label=LMS2012_EXT
+OS type: Linux
+Block size=1024 (log=0)
+Fragment size=1024 (log=0)
+Stride=0 blocks, Stripe width=0 blocks
+51584 inodes, 206164 blocks
+10308 blocks (5.00%) reserved for the super user
+First data block=1
+Maximum filesystem blocks=67371008
+26 block groups
+8192 blocks per group, 8192 fragments per group
+1984 inodes per group
+Superblock backups stored on blocks: 
+	8193, 24577, 40961, 57345, 73729, 204801
+
+Writing inode tables:  0/26 1/26 2/26 3/26 4/26 5/26 6/26 7/26 8/26 9/2610/2611/2612/2613/2614/2615/2616/2617/2618/2619/2620/2621/2622/2623/2624/2625/26done                            
+Creating journal (4096 blocks): done
+Writing superblocks and filesystem accounting information: done
+
+This filesystem will be automatically checked every 30 mounts or
+180 days, whichever comes first.  Use tune2fs -c or -i to override.
+
+WARNING: DOS-compatible mode is deprecated. It's strongly recommended to
+         switch off the mode (command 'c') and change display units to
+         sectors (command 'u').
+
+Command (m for help): 
+Disk /dev/sde: 1990 MB, 1990197248 bytes
+62 heads, 62 sectors/track, 1011 cylinders
+Units = cylinders of 3844 * 512 = 1968128 bytes
+Sector size (logical/physical): 512 bytes / 512 bytes
+I/O size (minimum/optimal): 512 bytes / 512 bytes
+Disk identifier: 0x00000000
+
+   Device Boot      Start         End      Blocks   Id  System
+
+Command (m for help): No partition is defined yet!
+
+Command (m for help): 1: unknown command
+Command action
+   a   toggle a bootable flag
+   b   edit bsd disklabel
+   c   toggle the dos compatibility flag
+   d   delete a partition
+   l   list known partition types
+   m   print this menu
+   n   add a new partition
+   o   create a new empty DOS partition table
+   p   print the partition table
+   q   quit without saving changes
+   s   create a new empty Sun disklabel
+   t   change a partition's system id
+   u   change display/entry units
+   v   verify the partition table
+   w   write table to disk and exit
+   x   extra functionality (experts only)
+
+Command (m for help): No partition is defined yet!
+
+Command (m for help): 2: unknown command
+Command action
+   a   toggle a bootable flag
+   b   edit bsd disklabel
+   c   toggle the dos compatibility flag
+   d   delete a partition
+   l   list known partition types
+   m   print this menu
+   n   add a new partition
+   o   create a new empty DOS partition table
+   p   print the partition table
+   q   quit without saving changes
+   s   create a new empty Sun disklabel
+   t   change a partition's system id
+   u   change display/entry units
+   v   verify the partition table
+   w   write table to disk and exit
+   x   extra functionality (experts only)
+
+Command (m for help): 
+Disk /dev/sde: 1990 MB, 1990197248 bytes
+62 heads, 62 sectors/track, 1011 cylinders
+Units = cylinders of 3844 * 512 = 1968128 bytes
+Sector size (logical/physical): 512 bytes / 512 bytes
+I/O size (minimum/optimal): 512 bytes / 512 bytes
+Disk identifier: 0x00000000
+
+   Device Boot      Start         End      Blocks   Id  System
+
+Command (m for help): Command action
+   e   extended
+   p   primary partition (1-4)
+Partition number (1-4): First cylinder (1-1011, default 1): Last cylinder, +cylinders or +size{K,M,G} (1-1011, default 1011): 
+Command (m for help): Selected partition 1
+Hex code (type L to list codes): Changed system type of partition 1 to b (W95 FAT32)
+
+Command (m for help): Command action
+   e   extended
+   p   primary partition (1-4)
+Partition number (1-4): First cylinder (29-1011, default 29): Using default value 29
+Last cylinder, +cylinders or +size{K,M,G} (29-1011, default 1011): 
+Command (m for help): 
+Disk /dev/sde: 1990 MB, 1990197248 bytes
+62 heads, 62 sectors/track, 1011 cylinders
+Units = cylinders of 3844 * 512 = 1968128 bytes
+Sector size (logical/physical): 512 bytes / 512 bytes
+I/O size (minimum/optimal): 512 bytes / 512 bytes
+Disk identifier: 0x00000000
+
+   Device Boot      Start         End      Blocks   Id  System
+/dev/sde1               1          28       53785    b  W95 FAT32
+/dev/sde2              29         136      207576   83  Linux
+
+Command (m for help): The partition table has been altered!
+
+Calling ioctl() to re-read partition table.
+
+WARNING: Re-reading the partition table failed with error 0: Success.
+The kernel still uses the old table. The new table will be used at
+the next reboot or after you run partprobe(8) or kpartx(8)
+
+WARNING: If you have created or modified any DOS 6.x
+partitions, please see the fdisk manual page for additional
+information.
+Syncing disks.
+/dev/sde1: No such file or directory
+mkfs.msdos 3.0.9 (31 Jan 2010)
+mke2fs 1.41.12 (17-May-2010)
+Could not stat /dev/sde2 --- No such file or directory
+
+The device apparently does not exist; did you specify it correctly?

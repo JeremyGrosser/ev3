@@ -1,0 +1,87 @@
+define    GYROPORT      1
+
+vmthread  MAIN
+{
+  DATA32  Timer
+  DATAF   DataF
+  
+  UI_DRAW(FILLWINDOW,0x00,0,0)
+  UI_DRAW(SELECT_FONT,SMALL_FONT)
+  UI_DRAW(TEXT,FG_COLOR,0,10,'Gyro Auto Zero   V0.00')
+  UI_DRAW(UPDATE)
+
+  OBJECT_START(ShowAngle)
+  
+  // All motor stopped
+  UI_DRAW(TEXT,FG_COLOR,0,100,'All motors stopped    ')
+  UI_DRAW(UPDATE)
+  
+Loop:
+  
+  // Wait 1 sec
+  TIMER_WAIT(1000,Timer)
+  TIMER_READY(Timer)
+  
+
+  // Auto zero gyro
+  UI_DRAW(TEXT,FG_COLOR,0,100,'Auto zero gyro        ')
+  UI_DRAW(UPDATE)
+  INPUT_WRITE(0,GYROPORT,1,0x88)
+  
+
+  // Wait 3 sec
+  TIMER_WAIT(3000,Timer)
+  TIMER_READY(Timer)
+  
+
+  // Run B + C forward power 30, 678 degrees, break
+  UI_DRAW(TEXT,FG_COLOR,0,100,'Run B + C forward     ')
+  UI_DRAW(UPDATE)
+  OUTPUT_STEP_SYNC(0,0x06,30,0,678,1)
+  OUTPUT_READY(0,0x06)
+
+
+  // Wait 1 sec
+  TIMER_WAIT(1000,Timer)
+  TIMER_READY(Timer)
+  
+
+  // Turn 10,-10
+  UI_DRAW(TEXT,FG_COLOR,0,100,'Turn                  ')
+  UI_DRAW(UPDATE)
+  OUTPUT_TIME_SYNC(0,0x06,-10,-200,0,1)
+  
+
+  // wait until 87 degrees
+NotTurned:
+  INPUT_DEVICE(READY_SI,0,GYROPORT,0,0,1,DataF)
+  JR_LTF(DataF,87.0F,NotTurned)
+  
+
+  // Break B + C
+  UI_DRAW(TEXT,FG_COLOR,0,100,'Break B + C           ')
+  UI_DRAW(UPDATE)
+  OUTPUT_STOP(0,0x06,1)
+
+
+	JR(Loop)
+}
+
+
+vmthread  ShowAngle
+{
+  DATAF   DataF
+  DATA32  Timer
+
+Loop:  
+  INPUT_DEVICE(READY_SI,0,GYROPORT,0,0,1,DataF)
+  UI_DRAW(SELECT_FONT,LARGE_FONT)
+  UI_DRAW(VALUE,FG_COLOR,16,50,DataF,5,0)
+  UI_DRAW(UPDATE)
+  
+  TIMER_WAIT(250,Timer)
+  TIMER_READY(Timer)
+  
+  JR(Loop)
+}
+

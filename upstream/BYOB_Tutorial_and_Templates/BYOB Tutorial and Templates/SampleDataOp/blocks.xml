@@ -1,0 +1,22 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<EditorDefinitions>
+  <PolyGroups ModuleName="SampleDataOp" ModuleVersion="1.00">
+	<PolyGroup Name="SampleDataOp" BlockFamily="DataOperations">
+      <Parameter Name="Input" Identification="builtin://Identification_Numeric.png" DataType="Single" Direction="Input" DefaultValue="0" />
+      <Parameter Name="Output" Identification="builtin://Identification_Numeric.png" DataType="Single" Direction="Output" />
+      <Block>
+        <Mode>Reciprocal</Mode>
+        <Reference Type="VILib" Name="SampleDataOpReciprocal.vix" />
+        <ParameterReference Name="Input" />
+        <ParameterReference Name="Output" />
+        <PaletteInfo Weight="0.5" />
+      </Block>
+      <Block>
+        <Mode>Cube</Mode>
+        <Reference Type="VILib" Name="SampleDataOpCube.vix" />
+        <ParameterReference Name="Input" />
+        <ParameterReference Name="Output" />
+      </Block>
+    </PolyGroup>
+  </PolyGroups>
+</EditorDefinitions>

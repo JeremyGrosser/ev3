@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Delete resource &apos;lmssrc/Port View/Port View.lms~&apos;" deleteContents="false" description="Delete resource &apos;lmssrc/Port View/Port View.lms~&apos;" element1="/lmssrc/Port View/Port View.lms~" flags="7" id="org.eclipse.ltk.core.refactoring.delete.resources" resources="1" stamp="1400827993411"/>
+</session>

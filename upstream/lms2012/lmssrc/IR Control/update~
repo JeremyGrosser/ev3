@@ -1,0 +1,55 @@
+#! /bin/bash
+
+path="apps"
+app="IR Control"
+srcfile="24x12_MotContApp"
+
+#*** GENERIC CONSTANTS *******************************************************
+
+bmpext=".bmp"
+gext=".rgf"
+bext=".rbf"
+am1808="../../lms2012/Linux_AM1808"
+x86="../../lms2012/Linux_X86"
+
+#*** COMPILE *****************************************************************
+
+echo
+echo -------------------------------------------------------------------------
+echo Compiling ../${path}/${app}
+echo
+
+../adk/asm "${app}"
+cp "${app}""${bext}" "${app}"/
+rm "${app}""${bext}"
+
+#*** CONVERT ICON ************************************************************
+
+convert "${srcfile}""${bmpext}" "${app}"/bitmap.xbm
+../adk/bmp "${app}"/bitmap "${app}"/icon
+
+#*** CONVERT GRAPHICS ********************************************************
+
+srcfile="MotorCtlAD"
+convert "${srcfile}""${bmpext}" "${app}"/bitmap.xbm
+../adk/bmp "${app}"/bitmap "${app}"/"${srcfile}"
+
+srcfile="MotorCtlBC"
+convert "${srcfile}${bmpext}" "${app}"/bitmap.xbm
+../adk/bmp "${app}"/bitmap "${app}"/"${srcfile}"
+
+#*** COPY IN PLACE ***********************************************************
+
+rm "${am1808}"/"${path}"/"${app}"/*.r?f
+rm "${x86}"/"${path}"/"${app}"/*.r?f
+cp "${app}"/*.r?f "${am1808}"/"${path}"/"${app}"/
+cp "${app}"/*.r?f "${x86}"/"${path}"/"${app}"/
+
+#rm -r "${am1808}"/"${path}"/"${app}"
+#cp -r "${app}" "${am1808}"/"${path}"/
+#rm -r "${x86}"/"${path}"/"${app}"
+#cp -r "${app}" "${x86}"/"${path}"/
+
+
+
+

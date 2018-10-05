@@ -1,0 +1,326 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<SourceFile xmlns="http://www.ni.com/SourceModel.xsd">
+    <Namespace Name="Project">
+        <VirtualInstrument Name="Syscalls" IsTopLevel="False" IsReentrant="False" Version="1.0.0.534" xmlns="http://www.ni.com/VirtualInstrument.xsd">
+            <FrontPanel>
+                <vimodel:FrontPanelCanvas xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:vimodel="clr-namespace:NationalInstruments.LabVIEW.VI.Design;assembly=NationalInstruments.LabVIEW.VI.SourceModel" x:Name="FrontPanel" />
+            </FrontPanel>
+            <BlockDiagram>
+                <MethodCall Id="n1" Bounds="189 -77 28 42" Target="X3\.Lib:NXTFileOpenRead">
+                    <Terminal Id="statusCode" Direction="Output" DataType="SByte" Hotspot="1 0.5" Bounds="14 0 14 14" />
+                    <Terminal Id="handle\ out" Direction="Output" DataType="Byte" Hotspot="1 0.5" Bounds="14 14 14 14" />
+                    <Terminal Id="filename" Direction="Input" DataType="String" Hotspot="0 0.5" Bounds="0 0 14 14" />
+                    <Terminal Id="length" Direction="Output" DataType="UInt32" Hotspot="1 0.5" Bounds="14 28 14 14" />
+                </MethodCall>
+                <MethodCall Id="n2" Bounds="245 -77 28 42" Target="X3\.Lib:NXTFileOpenWrite">
+                </MethodCall>
+                <MethodCall Id="n3" Bounds="301 -77 28 42" Target="X3\.Lib:NXTFileOpenAppend">
+                    <Terminal Id="statusCode" Direction="Output" DataType="SByte" Hotspot="1 0.5" Bounds="14 0 14 14" />
+                    <Terminal Id="handle\ in" Direction="Input" DataType="Byte" Hotspot="0 0.5" Bounds="0 14 14 14" />
+                    <Terminal Id="handle\ out" Direction="Output" DataType="Byte" Hotspot="1 0.5" Bounds="14 14 14 14" />
+                    <Terminal Id="filename" Direction="Input" DataType="String" Hotspot="0 0.5" Bounds="0 0 14 14" />
+                    <Terminal Id="length" Direction="Input" DataType="UInt32" Hotspot="0 0.5" Bounds="0 28 14 14" />
+                </MethodCall>
+                <MethodCall Id="n4" Bounds="357 -77 28 42" Target="X3\.Lib:NXTFileRead">
+                    <Terminal Id="statusCode" Direction="Output" DataType="SByte" Hotspot="1 0.5" Bounds="14 0 14 14" />
+                    <Terminal Id="handle\ in" Direction="Input" DataType="Byte" Hotspot="0 0.5" Bounds="0 14 14 14" />
+                    <Terminal Id="handle\ out" Direction="Output" DataType="Byte" Hotspot="1 0.5" Bounds="14 14 14 14" />
+                    <Terminal Id="buffer" Direction="Input" DataType="String" Hotspot="0 0.5" Bounds="0 0 14 14" />
+                    <Terminal Id="length\ in" Direction="Input" DataType="UInt32" Hotspot="0 0.5" Bounds="0 28 14 14" />
+                    <Terminal Id="length\ out" Direction="Output" DataType="UInt32" Hotspot="1 0.5" Bounds="14 28 14 14" />
+                </MethodCall>
+                <MethodCall Id="n5" Bounds="413 -77 28 56" Target="X3\.Lib:NXTFileWrite">
+                    <Terminal Id="statusCode" Direction="Output" DataType="SByte" Hotspot="1 0.5" Bounds="14 0 14 14" />
+                    <Terminal Id="handle\ in" Direction="Input" DataType="Byte" Hotspot="0 0.5" Bounds="0 14 14 14" />
+                    <Terminal Id="handle\ out" Direction="Output" DataType="Byte" Hotspot="1 0.5" Bounds="14 14 14 14" />
+                    <Terminal Id="buffer\ in" Direction="Input" DataType="String" Hotspot="0 0.5" Bounds="0 28 14 14" />
+                    <Terminal Id="buffer\ out" Direction="Output" DataType="String" Hotspot="1 0.5" Bounds="14 28 14 14" />
+                    <Terminal Id="length\ in" Direction="Input" DataType="UInt32" Hotspot="0 0.5" Bounds="0 42 14 14" />
+                    <Terminal Id="length\ out" Direction="Output" DataType="UInt32" Hotspot="1 0.5" Bounds="14 42 14 14" />
+                </MethodCall>
+                <MethodCall Id="n6" Bounds="469 -77 28 28" Target="X3\.Lib:NXTFileClose">
+                    <Terminal Id="statusCode" Direction="Output" DataType="SByte" Hotspot="1 0.5" Bounds="14 0 14 14" />
+                    <Terminal Id="handle\ in" Direction="Input" DataType="Byte" Hotspot="0 0.5" Bounds="0 14 14 14" />
+                    <Terminal Id="handle\ out" Direction="Output" DataType="Byte" Hotspot="1 0.5" Bounds="14 14 14 14" />
+                </MethodCall>
+                <MethodCall Id="n7" Bounds="525 -77 28 42" Target="X3\.Lib:NXTFileResolveHandle">
+                    <Terminal Id="statusCode" Direction="Output" DataType="SByte" Hotspot="1 0.5" Bounds="14 0 14 14" />
+                    <Terminal Id="handle\ out" Direction="Output" DataType="Byte" Hotspot="1 0.5" Bounds="14 14 14 14" />
+                    <Terminal Id="isWrite" Direction="Input" DataType="Boolean" Hotspot="0 0.5" Bounds="0 0 14 14" />
+                    <Terminal Id="filename" Direction="Output" DataType="String" Hotspot="1 0.5" Bounds="14 28 14 14" />
+                </MethodCall>
+                <MethodCall Id="n8" Bounds="574 -77 28 28" Target="X3\.Lib:NXTFileRename">
+                    <Terminal Id="statusCode" Direction="Output" DataType="SByte" Hotspot="1 0.5" Bounds="14 0 14 14" />
+                    <Terminal Id="oldFileName" Direction="Input" DataType="String" Hotspot="0 0.5" Bounds="0 0 14 14" />
+                    <Terminal Id="newFileName" Direction="Input" DataType="String" Hotspot="0 0.5" Bounds="0 14 14 14" />
+                </MethodCall>
+                <MethodCall Id="n9" Bounds="630 -77 28 14" Target="X3\.Lib:NXTFileDelete">
+                    <Terminal Id="statusCode" Direction="Output" DataType="SByte" Hotspot="1 0.5" Bounds="14 0 14 14" />
+                    <Terminal Id="fileName" Direction="Input" DataType="String" Hotspot="0 0.5" Bounds="0 0 14 14" />
+                </MethodCall>
+                <MethodCall Id="n10" Bounds="189 7 28 42" Target="X3\.Lib:NXTPlaySound">
+                    <Terminal Id="statusCode" Direction="Output" DataType="SByte" Hotspot="1 0.5" Bounds="14 0 14 14" />
+                    <Terminal Id="soundName" Direction="Input" DataType="String" Hotspot="0 0.5" Bounds="0 0 14 14" />
+                    <Terminal Id="Loop" Direction="Input" DataType="Boolean" Hotspot="0 0.5" Bounds="0 14 14 14" />
+                    <Terminal Id="Volume" Direction="Input" DataType="Byte" Hotspot="0 0.5" Bounds="0 28 14 14" />
+                </MethodCall>
+                <MethodCall Id="n11" Bounds="245 7 28 56" Target="X3\.Lib:NXTPlayNote">
+                    <Terminal Id="statusCode" Direction="Output" DataType="SByte" Hotspot="1 0.5" Bounds="14 0 14 14" />
+                    <Terminal Id="frequency" Direction="Input" DataType="UInt16" Hotspot="0 0.5" Bounds="0 0 14 14" />
+                    <Terminal Id="duration" Direction="Input" DataType="UInt16" Hotspot="0 0.5" Bounds="0 14 14 14" />
+                    <Terminal Id="loop" Direction="Input" DataType="Byte" Hotspot="0 0.5" Bounds="0 28 14 14" />
+                    <Terminal Id="volume" Direction="Input" DataType="Byte" Hotspot="0 0.5" Bounds="0 42 14 14" />
+                </MethodCall>
+                <MethodCall Id="n12" Bounds="301 7 28 28" Target="X3\.Lib:NXTSoundGetState">
+                    <Terminal Id="statusCode" Direction="Output" DataType="SByte" Hotspot="1 0.5" Bounds="14 0 14 14" />
+                    <Terminal Id="flags" Direction="Output" DataType="Byte" Hotspot="1 0.5" Bounds="14 14 14 14" />
+                </MethodCall>
+                <MethodCall Id="n13" Bounds="357 7 28 28" Target="X3\.Lib:NXTSoundSetState">
+                    <Terminal Id="statusCode" Direction="Output" DataType="SByte" Hotspot="1 0.5" Bounds="14 0 14 14" />
+                    <Terminal Id="state" Direction="Input" DataType="Byte" Hotspot="0 0.5" Bounds="0 0 14 14" />
+                    <Terminal Id="flags" Direction="Input" DataType="Byte" Hotspot="0 0.5" Bounds="0 14 14 14" />
+                </MethodCall>
+                <MethodCall Id="n14" Bounds="595 7 28 56" Target="X3\.Lib:NXTDrawText">
+                    <Terminal Id="statusCode" Direction="Output" DataType="SByte" Hotspot="1 0.5" Bounds="14 0 14 14" />
+                    <Terminal Id="x" Direction="Input" DataType="Int16" Hotspot="0 0.5" Bounds="0 0 14 14" />
+                    <Terminal Id="Y" Direction="Input" DataType="Int16" Hotspot="0 0.5" Bounds="0 14 14 14" />
+                    <Terminal Id="text" Direction="Input" DataType="String" Hotspot="0 0.5" Bounds="0 28 14 14" />
+                    <Terminal Id="options" Direction="Input" DataType="UInt32" Hotspot="0 0.5" Bounds="0 42 14 14" />
+                </MethodCall>
+                <MethodCall Id="n15" Bounds="651 7 28 42" Target="X3\.Lib:NXTDrawPoint">
+                    <Terminal Id="statusCode" Direction="Output" DataType="SByte" Hotspot="1 0.5" Bounds="14 0 14 14" />
+                    <Terminal Id="x" Direction="Input" DataType="Int16" Hotspot="0 0.5" Bounds="0 0 14 14" />
+                    <Terminal Id="Y" Direction="Input" DataType="Int16" Hotspot="0 0.5" Bounds="0 14 14 14" />
+                    <Terminal Id="options" Direction="Input" DataType="UInt32" Hotspot="0 0.5" Bounds="0 28 14 14" />
+                </MethodCall>
+                <MethodCall Id="n16" Bounds="707 7 28 70" Target="X3\.Lib:NXTDrawLine">
+                    <Terminal Id="statusCode" Direction="Output" DataType="SByte" Hotspot="1 0.5" Bounds="14 0 14 14" />
+                    <Terminal Id="xStart" Direction="Input" DataType="Int16" Hotspot="0 0.5" Bounds="0 0 14 14" />
+                    <Terminal Id="yStart" Direction="Input" DataType="Int16" Hotspot="0 0.5" Bounds="0 14 14 14" />
+                    <Terminal Id="xEnd" Direction="Input" DataType="Int16" Hotspot="0 0.5" Bounds="0 28 14 14" />
+                    <Terminal Id="yEnd" Direction="Input" DataType="Int16" Hotspot="0 0.5" Bounds="0 42 14 14" />
+                    <Terminal Id="options" Direction="Input" DataType="UInt32" Hotspot="0 0.5" Bounds="0 56 14 14" />
+                </MethodCall>
+                <MethodCall Id="n17" Bounds="763 7 28 56" Target="X3\.Lib:NXTDrawCircle">
+                    <Terminal Id="statusCode" Direction="Output" DataType="SByte" Hotspot="1 0.5" Bounds="14 0 14 14" />
+                    <Terminal Id="xCenter" Direction="Input" DataType="Int16" Hotspot="0 0.5" Bounds="0 0 14 14" />
+                    <Terminal Id="yCenter" Direction="Input" DataType="Int16" Hotspot="0 0.5" Bounds="0 14 14 14" />
+                    <Terminal Id="radius" Direction="Input" DataType="Byte" Hotspot="0 0.5" Bounds="0 28 14 14" />
+                    <Terminal Id="options" Direction="Input" DataType="UInt32" Hotspot="0 0.5" Bounds="0 42 14 14" />
+                </MethodCall>
+                <MethodCall Id="n18" Bounds="819 7 28 70" Target="X3\.Lib:NXTDrawRect">
+                    <Terminal Id="statusCode" Direction="Output" DataType="SByte" Hotspot="1 0.5" Bounds="14 0 14 14" />
+                    <Terminal Id="x" Direction="Input" DataType="Int16" Hotspot="0 0.5" Bounds="0 0 14 14" />
+                    <Terminal Id="y" Direction="Input" DataType="Int16" Hotspot="0 0.5" Bounds="0 14 14 14" />
+                    <Terminal Id="width" Direction="Input" DataType="Int16" Hotspot="0 0.5" Bounds="0 28 14 14" />
+                    <Terminal Id="height" Direction="Input" DataType="Int16" Hotspot="0 0.5" Bounds="0 42 14 14" />
+                    <Terminal Id="options" Direction="Input" DataType="UInt32" Hotspot="0 0.5" Bounds="0 56 14 14" />
+                </MethodCall>
+                <MethodCall Id="n19" Bounds="875 7 28 70" Target="X3\.Lib:NXTDrawPicture">
+                    <Terminal Id="statusCode" Direction="Output" DataType="SByte" Hotspot="1 0.5" Bounds="14 0 14 14" />
+                    <Terminal Id="x" Direction="Input" DataType="Int16" Hotspot="0 0.5" Bounds="0 0 14 14" />
+                    <Terminal Id="y" Direction="Input" DataType="Int16" Hotspot="0 0.5" Bounds="0 14 14 14" />
+                    <Terminal Id="filename" Direction="Input" DataType="String" Hotspot="0 0.5" Bounds="0 28 14 14" />
+                    <Terminal Id="variables" Direction="Input" DataType="Int32[]" Hotspot="0 0.5" Bounds="0 42 14 14" />
+                    <Terminal Id="options" Direction="Input" DataType="UInt32" Hotspot="0 0.5" Bounds="0 56 14 14" />
+                </MethodCall>
+                <MethodCall Id="n20" Bounds="931 7 28 14" Target="X3\.Lib:NXTSetScreenMode">
+                    <Terminal Id="statusCode" Direction="Output" DataType="SByte" Hotspot="1 0.5" Bounds="14 0 14 14" />
+                    <Terminal Id="screenmode" Direction="Input" DataType="UInt32" Hotspot="0 0.5" Bounds="0 0 14 14" />
+                </MethodCall>
+                <MethodCall Id="n21" Bounds="504 203 28 56" Target="X3\.Lib:NXTReadButton">
+                </MethodCall>
+                <MethodCall Id="n22" Bounds="189 112 28 42" Target="X3\.Lib:NXTCommLSWrite">
+                    <Terminal Id="statusCode" Direction="Output" DataType="SByte" Hotspot="1 0.5" Bounds="14 0 14 14" />
+                    <Terminal Id="port\ in" Direction="Input" DataType="Byte" Hotspot="0 0.5" Bounds="0 14 14 14" />
+                    <Terminal Id="port\ out" Direction="Output" DataType="Byte" Hotspot="1 0.5" Bounds="14 14 14 14" />
+                    <Terminal Id="buffer" Direction="Input" DataType="Byte[]" Hotspot="0 0.5" Bounds="0 0 14 14" />
+                    <Terminal Id="returnLength" Direction="Input" DataType="Byte" Hotspot="0 0.5" Bounds="0 28 14 14" />
+                </MethodCall>
+                <MethodCall Id="n23" Bounds="245 112 28 42" Target="X3\.Lib:NXTCommLSRead">
+                    <Terminal Id="statusCode" Direction="Output" DataType="SByte" Hotspot="1 0.5" Bounds="14 0 14 14" />
+                    <Terminal Id="port\ in" Direction="Input" DataType="Byte" Hotspot="0 0.5" Bounds="0 14 14 14" />
+                    <Terminal Id="port\ out" Direction="Output" DataType="Byte" Hotspot="1 0.5" Bounds="14 14 14 14" />
+                    <Terminal Id="buffer" Direction="Output" DataType="Byte[]" Hotspot="1 0.5" Bounds="14 28 14 14" />
+                    <Terminal Id="returnLength" Direction="Input" DataType="Byte" Hotspot="0 0.5" Bounds="0 0 14 14" />
+                </MethodCall>
+                <MethodCall Id="n24" Bounds="301 112 28 42" Target="X3\.Lib:NXTCommLSCheckStatus">
+                    <Terminal Id="statusCode" Direction="Output" DataType="SByte" Hotspot="1 0.5" Bounds="14 0 14 14" />
+                    <Terminal Id="port\ in" Direction="Input" DataType="Byte" Hotspot="0 0.5" Bounds="0 14 14 14" />
+                    <Terminal Id="port\ out" Direction="Output" DataType="Byte" Hotspot="1 0.5" Bounds="14 14 14 14" />
+                    <Terminal Id="bytesReady" Direction="Output" DataType="Byte" Hotspot="1 0.5" Bounds="14 28 14 14" />
+                </MethodCall>
+                <MethodCall Id="n25" Bounds="819 210 28 14" Target="X3\.Lib:NXTRandomNumber">
+                    <Terminal Id="number" Direction="Output" DataType="Int16" Hotspot="1 0.5" Bounds="14 0 14 14" />
+                </MethodCall>
+                <MethodCall Id="n26" Bounds="189 203 28 14" Target="X3\.Lib:NXTGetStartTick">
+                    <Terminal Id="progStartTick" Direction="Output" DataType="UInt32" Hotspot="1 0.5" Bounds="14 0 14 14" />
+                </MethodCall>
+                <MethodCall Id="n27" Bounds="651 119 28 28" Target="X3\.Lib:NXTMessageWrite">
+                    <Terminal Id="statusCode" Direction="Output" DataType="SByte" Hotspot="1 0.5" Bounds="14 0 14 14" />
+                    <Terminal Id="queueID" Direction="Input" DataType="Byte" Hotspot="0 0.5" Bounds="0 0 14 14" />
+                    <Terminal Id="message" Direction="Input" DataType="String" Hotspot="0 0.5" Bounds="0 14 14 14" />
+                </MethodCall>
+                <MethodCall Id="n28" Bounds="707 119 28 28" Target="X3\.Lib:NXTMessageRead">
+                    <Terminal Id="statusCode" Direction="Output" DataType="SByte" Hotspot="1 0.5" Bounds="14 0 14 14" />
+                    <Terminal Id="queueID" Direction="Input" DataType="Byte" Hotspot="0 0.5" Bounds="0 0 14 14" />
+                    <Terminal Id="remove" Direction="Input" DataType="Boolean" Hotspot="0 0.5" Bounds="0 14 14 14" />
+                    <Terminal Id="message" Direction="Output" DataType="String" Hotspot="1 0.5" Bounds="14 14 14 14" />
+                </MethodCall>
+                <MethodCall Id="n29" Bounds="763 119 28 14" Target="X3\.Lib:NXTCommBTCheckStatus">
+                    <Terminal Id="statusCode" Direction="Output" DataType="SByte" Hotspot="1 0.5" Bounds="14 0 14 14" />
+                    <Terminal Id="connection" Direction="Input" DataType="Byte" Hotspot="0 0.5" Bounds="0 0 14 14" />
+                </MethodCall>
+                <MethodCall Id="n30" Bounds="819 119 28 28" Target="X3\.Lib:NXTCommBTWrite">
+                    <Terminal Id="statusCode" Direction="Output" DataType="SByte" Hotspot="1 0.5" Bounds="14 0 14 14" />
+                    <Terminal Id="connection" Direction="Input" DataType="Byte" Hotspot="0 0.5" Bounds="0 0 14 14" />
+                    <Terminal Id="buffer" Direction="Input" DataType="Byte[]" Hotspot="0 0.5" Bounds="0 14 14 14" />
+                </MethodCall>
+                <MethodCall Id="n31" Bounds="931 210 28 14" Target="X3\.Lib:NXTKeepAlive">
+                    <Terminal Id="currSleepTime" Direction="Output" DataType="UInt32" Hotspot="1 0.5" Bounds="14 0 14 14" />
+                </MethodCall>
+                <MethodCall Id="n32" Bounds="875 -77 28 42" Target="X3\.Lib:NXTIOMapRead">
+                    <Terminal Id="statusCode" Direction="Output" DataType="SByte" Hotspot="1 0.5" Bounds="14 0 14 14" />
+                    <Terminal Id="modulename" Direction="Input" DataType="String" Hotspot="0 0.5" Bounds="0 0 14 14" />
+                    <Terminal Id="offset" Direction="Input" DataType="UInt16" Hotspot="0 0.5" Bounds="0 14 14 14" />
+                    <Terminal Id="count" Direction="Input" DataType="UInt32" Hotspot="0 0.5" Bounds="0 28 14 14" />
+                    <Terminal Id="buffer" Direction="Output" DataType="Byte[]" Hotspot="1 0.5" Bounds="14 14 14 14" />
+                </MethodCall>
+                <MethodCall Id="n33" Bounds="931 -77 28 42" Target="X3\.Lib:NXTIOMapWrite">
+                    <Terminal Id="statusCode" Direction="Output" DataType="SByte" Hotspot="1 0.5" Bounds="14 0 14 14" />
+                    <Terminal Id="modulename" Direction="Input" DataType="String" Hotspot="0 0.5" Bounds="0 0 14 14" />
+                    <Terminal Id="offset" Direction="Input" DataType="UInt16" Hotspot="0 0.5" Bounds="0 14 14 14" />
+                    <Terminal Id="buffer" Direction="Input" DataType="Byte[]" Hotspot="0 0.5" Bounds="0 28 14 14" />
+                </MethodCall>
+                <MethodCall Id="n34" Bounds="560 203 28 84" Target="X3\.Lib:NXTColorSensorRead">
+                </MethodCall>
+                <MethodCall Id="n35" Bounds="875 119 28 14" Target="X3\.Lib:NXTCommBTOnOff">
+                    <Terminal Id="statusCode" Direction="Output" DataType="SByte" Hotspot="1 0.5" Bounds="14 0 14 14" />
+                    <Terminal Id="state" Direction="Input" DataType="Boolean" Hotspot="0 0.5" Bounds="0 0 14 14" />
+                </MethodCall>
+                <MethodCall Id="n36" Bounds="931 119 28 42" Target="X3\.Lib:NXTCommBTConnection">
+                    <Terminal Id="statusCode" Direction="Output" DataType="SByte" Hotspot="1 0.5" Bounds="14 0 14 14" />
+                    <Terminal Id="action" Direction="Input" DataType="Byte" Hotspot="0 0.5" Bounds="0 0 14 14" />
+                    <Terminal Id="partnerName" Direction="Input" DataType="String" Hotspot="0 0.5" Bounds="0 14 14 14" />
+                    <Terminal Id="connection" Direction="Input" DataType="Byte" Hotspot="0 0.5" Bounds="0 28 14 14" />
+                </MethodCall>
+                <MethodCall Id="n37" Bounds="420 301 28 14" Target="X3\.Lib:NXTReadSemData">
+                    <Terminal Id="statusCode" Direction="Output" DataType="SByte" Hotspot="1 0.5" Bounds="14 0 14 14" />
+                    <Terminal Id="which" Direction="Input" DataType="Byte" Hotspot="0 0.5" Bounds="0 0 14 14" />
+                </MethodCall>
+                <MethodCall Id="n38" Bounds="476 301 28 42" Target="X3\.Lib:NXTWriteSemData">
+                    <Terminal Id="statusCode" Direction="Output" DataType="SByte" Hotspot="1 0.5" Bounds="14 0 14 14" />
+                    <Terminal Id="which" Direction="Input" DataType="Byte" Hotspot="0 0.5" Bounds="0 0 14 14" />
+                    <Terminal Id="newValue" Direction="Input" DataType="Byte" Hotspot="0 0.5" Bounds="0 14 14 14" />
+                    <Terminal Id="action" Direction="Input" DataType="Byte" Hotspot="0 0.5" Bounds="0 28 14 14" />
+                </MethodCall>
+                <MethodCall Id="n39" Bounds="189 301 28 28" Target="X3\.Lib:NXTComputeCalibValue">
+                    <Terminal Id="statusCode" Direction="Output" DataType="SByte" Hotspot="1 0.5" Bounds="14 0 14 14" />
+                    <Terminal Id="name" Direction="Input" DataType="String" Hotspot="0 0.5" Bounds="0 0 14 14" />
+                    <Terminal Id="raw\ in" Direction="Input" DataType="UInt16" Hotspot="0 0.5" Bounds="0 14 14 14" />
+                    <Terminal Id="raw\ out" Direction="Output" DataType="UInt16" Hotspot="1 0.5" Bounds="14 14 14 14" />
+                </MethodCall>
+                <MethodCall Id="n40" Bounds="245 301 28 42" Target="X3\.Lib:NXTUpdateCalibCacheInfo">
+                    <Terminal Id="statusCode" Direction="Output" DataType="SByte" Hotspot="1 0.5" Bounds="14 0 14 14" />
+                    <Terminal Id="name" Direction="Input" DataType="String" Hotspot="0 0.5" Bounds="0 0 14 14" />
+                    <Terminal Id="min" Direction="Input" DataType="UInt16" Hotspot="0 0.5" Bounds="0 14 14 14" />
+                    <Terminal Id="max" Direction="Input" DataType="UInt16" Hotspot="0 0.5" Bounds="0 28 14 14" />
+                </MethodCall>
+                <MethodCall Id="n41" Bounds="245 203 28 14" Target="X3\.Lib:NXTDatalogWrite">
+                    <Terminal Id="statusCode" Direction="Output" DataType="SByte" Hotspot="1 0.5" Bounds="14 0 14 14" />
+                    <Terminal Id="message" Direction="Input" DataType="String" Hotspot="0 0.5" Bounds="0 0 14 14" />
+                </MethodCall>
+                <MethodCall Id="n42" Bounds="301 203 28 28" Target="X3\.Lib:NXTDatalogGetTimes">
+                    <Terminal Id="statusCode" Direction="Output" DataType="SByte" Hotspot="1 0.5" Bounds="14 0 14 14" />
+                    <Terminal Id="syncTime" Direction="Input" DataType="UInt32" Hotspot="0 0.5" Bounds="0 0 14 14" />
+                    <Terminal Id="syncTick" Direction="Input" DataType="UInt32" Hotspot="0 0.5" Bounds="0 14 14 14" />
+                </MethodCall>
+                <MethodCall Id="n43" Bounds="875 210 28 14" Target="X3\.Lib:NXTSetSleepTimeout">
+                    <Terminal Id="statusCode" Direction="Output" DataType="SByte" Hotspot="1 0.5" Bounds="14 0 14 14" />
+                    <Terminal Id="timeout" Direction="Input" DataType="UInt32" Hotspot="0 0.5" Bounds="0 0 14 14" />
+                </MethodCall>
+                <MethodCall Id="n44" Bounds="686 -77 28 28" Target="X3\.Lib:NXTListFiles">
+                    <Terminal Id="statusCode" Direction="Output" DataType="SByte" Hotspot="1 0.5" Bounds="14 0 14 14" />
+                    <Terminal Id="pattern" Direction="Input" DataType="String" Hotspot="0 0.5" Bounds="0 0 14 14" />
+                    <Terminal Id="list\ in" Direction="Input" DataType="String[]" Hotspot="0 0.5" Bounds="0 14 14 14" />
+                    <Terminal Id="list\ out" Direction="Output" DataType="String[]" Hotspot="1 0.5" Bounds="14 14 14 14" />
+                </MethodCall>
+              <MethodCall Id="n45" Bounds="800 220 28 28" Target="X3\.Lib:NXTGetInValueScaled">
+              </MethodCall>
+              <MethodCall Id="n2" Bounds="100 300 28 112" Target="X3\.Lib:NXTMotorPropPortList">
+                <Terminal Id="port\ in" Direction="Input" Wire="w1" DataType="Byte[]" Hotspot="0 0.5" Bounds="0 0 14 14" />
+                <Terminal Id="port\ out" Direction="Output" DataType="Byte[]" Hotspot="1 0.5" Bounds="14 0 14 14" />
+                <Terminal Id="tachoLimit" Direction="Input" Wire="w2" DataType="UInt32" Hotspot="0 0.5" Bounds="0 14 14 14" />
+                <Terminal Id="power" Direction="Input" Wire="w0" DataType="SByte" Hotspot="0 0.5" Bounds="0 28 14 14" />
+                <Terminal Id="mode" Direction="Input" Wire="w3" DataType="Byte" Hotspot="0 0.5" Bounds="0 42 14 14" />
+                <Terminal Id="regMode" Direction="Input" Wire="w2" DataType="Byte" Hotspot="0 0.5" Bounds="0 56 14 14" />
+                <Terminal Id="runState" Direction="Input" Wire="w4" DataType="Byte" Hotspot="0 0.5" Bounds="0 70 14 14" />
+                <Terminal Id="turnRatio" Direction="Input" Wire="w2" DataType="SByte" Hotspot="0 0.5" Bounds="0 84 14 14" />
+                <Terminal Id="flags" Direction="Input" Wire="w5" DataType="Byte" Hotspot="0 0.5" Bounds="0 98 14 14" />
+              </MethodCall>
+              <MethodCall Id="n2" Bounds="100 300 28 112" Target="X3\.Lib:NXTGetOutRunState">
+              </MethodCall>  
+              <MethodCall Id="n45" Bounds="1000 220 28 14" Target="X3\.Lib:RxeGetTick">
+                <Terminal Id="Destination" Direction="Output" DataType="UInt32" Hotspot="1 0.5" Bounds="14 0 14 14" />
+              </MethodCall>
+              <MethodCall Id="n45" Bounds="1010 240 28 28" Target="X3\.Lib:NXTGetOutRotation">
+              </MethodCall>
+              <MethodCall Id="n45" Bounds="1050 240 28 14" Target="X3\.Lib:NXTSetVariable">
+              </MethodCall>
+              <MethodCall Id="n45" Bounds="1120 240 28 14" Target="X3\.Lib:NXTGetVariable">
+              </MethodCall>
+              <MethodCall Id="n45" Bounds="1120 350 28 14" Target="X3\.Lib:NXTSetInType">
+              </MethodCall>
+              <MethodCall Id="n45" Bounds="1180 380 28 28" Target="X3\.Lib:NXTGetOutPower">
+              </MethodCall>
+              <MethodCall Id="n45" Bounds="0 400 28 14" Target="X3\.Lib:NXTGetInValueScaled">
+              </MethodCall>
+              <MethodCall Id="n45" Bounds="0 400 28 14" Target="X3\.Lib:NXTGetInValue">
+              </MethodCall>
+              <MethodCall Id="n45" Bounds="0 400 28 14" Target="X3\.Lib:NXTCommLSWrite">
+              </MethodCall>
+              <MethodCall Id="n45" Bounds="200 400 28 14" Target="X3\.Lib:NXTCommLSRead">
+              </MethodCall>
+              <MethodCall Id="n45" Bounds="600 400 28 14" Target="X3\.Lib:NXTCommLSCheckStatus">
+              </MethodCall>
+              <MethodCall Id="n45" Bounds="700 400 28 14" Target="X3\.Lib:Wait">
+              </MethodCall>
+              <MethodCall Id="n45" Bounds="800 400 28 14" Target="X3\.Lib:RxeStopProgram">
+              </MethodCall>
+              <Comment Bounds="98 -70 57 32" SizeMode="Auto" AttachStyle="Free">
+                    <Content>File IO</Content>
+                </Comment>
+                <Comment Bounds="112 14 43 32" SizeMode="Auto" AttachStyle="Free">
+                    <Content>Sound</Content>
+                </Comment>
+                <Comment Bounds="504 14 57 32" SizeMode="Auto" AttachStyle="Free">
+                    <Content>Display</Content>
+                </Comment>
+                <Comment Bounds="70 119 83 32" SizeMode="Auto" AttachStyle="Free">
+                    <Content>Lowspeed IO</Content>
+                </Comment>
+                <Comment Bounds="791 -70 50 32" SizeMode="Auto" AttachStyle="Free">
+                    <Content>IO Map</Content>
+                </Comment>
+                <Comment Bounds="497 126 116 32" SizeMode="Auto" AttachStyle="Free">
+                    <Content>BT and Messaging</Content>
+                </Comment>
+                <Comment Bounds="98 203 57 32" SizeMode="Auto" AttachStyle="Free">
+                    <Content>Datalog</Content>
+                </Comment>
+                <Comment Bounds="413 203 57 32" SizeMode="Auto" AttachStyle="Free">
+                    <Content>Misc IO</Content>
+                </Comment>
+                <Comment Bounds="714 210 70 32" SizeMode="Auto" AttachStyle="Free">
+                    <Content>Misc Func</Content>
+                </Comment>
+                <Comment Bounds="70 301 83 32" SizeMode="Auto" AttachStyle="Free">
+                    <Content>Calibration</Content>
+                </Comment>
+                <Comment Bounds="315 301 70 32" SizeMode="Auto" AttachStyle="Free">
+                    <Content>Semaphore</Content>
+                </Comment>
+            </BlockDiagram>
+        </VirtualInstrument>
+    </Namespace>
+</SourceFile>

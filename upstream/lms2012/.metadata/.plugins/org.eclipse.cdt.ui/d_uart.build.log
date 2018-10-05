@@ -1,0 +1,14 @@
+
+**** Build of configuration Linuxmod_X86 for project d_uart ****
+
+/home/tcp/projects/lms2012/d_uart/Linuxmod_X86/buildmod d_uart all 
+make: Går til katalog '/usr/src/linux-headers-2.6.38-8-generic'
+  LD      /home/tcp/projects/lms2012/d_uart/Linuxmod_X86/built-in.o
+  CC [M]  /home/tcp/projects/lms2012/d_uart/Linuxmod_X86/d_uart.o
+  Building modules, stage 2.
+  MODPOST 1 modules
+  CC      /home/tcp/projects/lms2012/d_uart/Linuxmod_X86/d_uart.mod.o
+  LD [M]  /home/tcp/projects/lms2012/d_uart/Linuxmod_X86/d_uart.ko
+make: Forlader katalog '/usr/src/linux-headers-2.6.38-8-generic'
+rm: kan ikke fjerne '..': Er et filkatalog
+rm: kan ikke fjerne 'Module.markers': Ingen sådan fil eller filkatalog
